@@ -1,0 +1,73 @@
+.nav {
+  height: 50px;
+  width: 100%;
+  background-color: #de5347;
+  z-index: 2;
+  color: #fff;
+}
+.fix-nav {
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+.logo {
+  float: left;
+  margin-left: 20px;
+  font-weight: bold;
+  height: 100%;
+  width: 100px;
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  line-height: 50px;
+}
+.nav-li {
+  float: left;
+}
+.nav-li li {
+  float: left;
+  height: 50px;
+  line-height: 50px;
+  padding: 0 26px;
+  font-size: 14px;
+  color: #ffffff;
+  cursor: pointer;
+}
+.nav-li li.current {
+  background-color: #cd3225;
+}
+.nav-li li:hover {
+  color: #ffffff;
+}
+.nav .txt-search {
+  float: right;
+  margin-right: 20px;
+  margin-top: 5px;
+  background: rgba(255, 255, 255, 0.2);
+}
+.nav .txt-search input {
+  background: transparent;
+}
+.content {
+  padding: 20px;
+  margin-top: 50px;
+}
+.register-wrap h2 {
+  font-weight: normal;
+  font-size: 16px;
+  color: #333333;
+  margin-bottom: 28px;
+}
+.register-wrap {
+  border: 1px solid #e4e4e4;
+  padding: 40px;
+  width: 50%;
+  margin: 80px auto 0 auto;
+}
+.register-wrap .txt {
+  width: 100%;
+}
+.btn-wrap {
+  margin: 14px 0;
+  text-align: center;
+}
