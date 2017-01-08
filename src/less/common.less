@@ -700,11 +700,10 @@ body{
 }
 .default-slide-nav-wrap{
 	position:absolute;
-	top:0;
+	top:40px;
 	left:0;
 	width:200px;
 	height:100%;
-	padding-top: 40px;
 	box-sizing: border-box;
 	background-color: darken(@main-color,40%);
 	overflow-x: hidden;
@@ -735,6 +734,8 @@ body{
 .default-slide-nav .first-nav-li a{
 	position:relative;
 	display:block;
+	*display:inline-block;
+	*width:100%;
 }
 .default-slide-nav .first-nav-li:hover,
 .default-slide-nav .first-nav-li.current{

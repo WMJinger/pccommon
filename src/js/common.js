@@ -140,6 +140,8 @@ function setPicSize(){
     author:吴明姜
 */
 function defaultLeftNav(){
+    // 设置导航高度
+    $('.default-slide-nav-wrap').css('height',$(window).height()-$('.default-head-content').height()-1+'px');
     // 设置导航项高度
     $('.default-slide-nav').css('height',$(window).height()-$('.default-head-content').height()-$('.slide-nav-top').height()-1+'px');
     // 展开收缩事件
@@ -151,8 +153,13 @@ function defaultLeftNav(){
             $(this).removeClass('on');
             $(this).next('ul').slideUp();
         }
-        $('.default-slide-nav-wrap').animate({width:'200px'},300);
-        $('.slide-nav-btn').removeClass('on');
+        // 如果左侧导航收缩，则展开
+        if($('.slide-nav-btn').hasClass('on')){
+            $('.default-slide-nav-wrap').animate({width:'200px'},300);
+            $('.default-right-content').animate({width:($('.default-right-content').width()-150)+'px',paddingLeft:'200px'},300);
+            $('.slide-nav-btn').removeClass('on');
+        }
+        
         $(".frame-content").attr("src",$(this).attr('url'));
         e.stopPropagation();
     });
@@ -164,9 +171,11 @@ function defaultLeftNav(){
         if(!$(this).hasClass('on')){
             $(this).addClass('on');
             $('.default-slide-nav-wrap').animate({width:'50px'},300);
+            $('.default-right-content').animate({width:($('.default-right-content').width()+150)+'px',paddingLeft:'50px'},300);
         }else{
             $(this).removeClass('on');
             $('.default-slide-nav-wrap').animate({width:'200px'},300);
+            $('.default-right-content').animate({width:($('.default-right-content').width()-150)+'px',paddingLeft:'200px'},300);
         }
     });
 }
@@ -176,6 +185,7 @@ function defaultLeftNav(){
     author:吴明姜
 */
 function frameContetn(){
+    // 设置右框架高度
     $('.default-right-content').css('height',$(window).height()-$('.default-head-content').height()-1+'px')
     .css('width',$(window).width()-$('.default-slide-nav-wrap').width()+'px');
     
