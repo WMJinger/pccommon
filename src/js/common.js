@@ -13,8 +13,14 @@ $(function() {
     responsiveImg();
     // 默认左侧菜单
     defaultLeftNav();
+    setLeftNavSize();
     //右侧框架
-    frameContetn();
+    setframeContentSize();
+    $(window).bind('resize',function(){
+        //窗口变动实时更新代码，请写在这里
+        setLeftNavSize();
+        setframeContentSize();
+    });
 });
 /* 
     name:弹出窗口
@@ -135,15 +141,11 @@ function setPicSize(){
     }
 }
 /* 
-    name:默认左侧菜单
+    name:默认左侧菜单,可设置无限级，兼容IE7+
     date:2017-01-07
     author:吴明姜
 */
 function defaultLeftNav(){
-    // 设置导航高度
-    $('.default-slide-nav-wrap').css('height',$(window).height()-$('.default-head-content').height()-1+'px');
-    // 设置导航项高度
-    $('.default-slide-nav').css('height',$(window).height()-$('.default-head-content').height()-$('.slide-nav-top').height()-1+'px');
     // 展开收缩事件
     $('.default-slide-nav-wrap').on('click','.slide-link',function(e){
         if(!$(this).hasClass('on')){
@@ -180,11 +182,22 @@ function defaultLeftNav(){
     });
 }
 /* 
+    name:设置左菜单宽高
+    date:2017-01-09
+    author:吴明姜
+*/
+function setLeftNavSize(){
+    // 设置导航高度
+    $('.default-slide-nav-wrap').css('height',$(window).height()-$('.default-head-content').height()-1+'px');
+    // 设置导航项高度
+    $('.default-slide-nav').css('height',$(window).height()-$('.default-head-content').height()-$('.slide-nav-top').height()-1+'px');
+}
+/* 
     name:iframe右框架
     date:2017-01-07
     author:吴明姜
 */
-function frameContetn(){
+function setframeContentSize(){
     // 设置右框架高度
     $('.default-right-content').css('height',$(window).height()-$('.default-head-content').height()-1+'px')
     .css('width',$(window).width()-$('.default-slide-nav-wrap').width()+'px');

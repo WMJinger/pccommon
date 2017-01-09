@@ -292,7 +292,7 @@ body{
 	display:inline-block;
 	width:20px;
 	height:20px;
-	background: url("@{images}/icon.png") -51px -24px no-repeat;
+	background: url("@{images}/icon.png") -51px -22px no-repeat;
 }
 /* 
 	name:列布局样式
@@ -584,7 +584,7 @@ body{
 	width: 7px;
 }
 .black-scroll::-webkit-scrollbar-thumb {
-	background-color: rgba(0, 0, 0, .5);
+	background-color: darken(@main-color,54%);
 	background-clip: padding-box;
 	min-height: 28px;
 	padding: 100px 0;
@@ -595,6 +595,15 @@ body{
 	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
 	-webkit-border-radius: 10px;
 	border-radius: 10px;
+}
+.black-scroll{
+	SCROLLBAR-FACE-COLOR:darken(@main-color,30%); 
+	SCROLLBAR-SHADOW-COLOR: darken(@main-color,20%); 
+	SCROLLBAR-HIGHLIGHT-COLOR: #92C0D1; 
+	SCROLLBAR-3DLIGHT-COLOR: #DDF8FF; 
+	SCROLLBAR-DARKSHADOW-COLOR: #92C0D1; 
+	SCROLLBAR-TRACK-COLOR:darken(@main-color,46%); 
+	SCROLLBAR-ARROW-COLOR: darken(@main-color,30%);
 }
 /* 
 	name:上下三角形图标
@@ -725,34 +734,35 @@ body{
 	margin:4px auto;
 }
 .default-slide-nav{
+	*position:relative;
 	overflow-x: hidden;
 	overflow-y: auto;
 }
 .default-slide-nav .first-nav-li{
 	line-height: 34px;
 }
-.default-slide-nav .first-nav-li a{
+.default-slide-nav .first-nav-li div{
 	position:relative;
-	display:block;
-	*display:inline-block;
-	*width:100%;
+	cursor:pointer;
 }
 .default-slide-nav .first-nav-li:hover,
 .default-slide-nav .first-nav-li.current{
 	background-color: darken(@main-color,50%);
 }
-.default-slide-nav .first-nav-li a i{
-	vertical-align: middle;
-	margin-left: @txt-form-gap;
-	margin-right: 10px;
+.default-slide-nav .first-nav-li div i{
+	position:absolute;
+	top:7px;
+	left:@txt-form-gap;
 }
 .nav-li-text{
-	position:absolute;
-	left:56px;
-	top:0px;
+	display:block;
+	*display:inline-block;
+	padding-left: 56px;
 	white-space: nowrap;
 	font-size: 14px;
 	color:darken(@main-color,10%);
+	overflow:hidden;
+	text-overflow: ellipsis;
 }
 .default-slide-nav .first-nav-li .second-nav-li a:hover .nav-li-text{
 	color:@main-color;
@@ -768,6 +778,7 @@ body{
 	padding-top:40px;
 	padding-left: 200px;
 	overflow: hidden;
+	background-color: #fff;
 }
 .frame-content{
 	*position:relative;
