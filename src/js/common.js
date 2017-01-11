@@ -5,8 +5,6 @@
     author:UI
 */
 $(function() {
-    // 弹窗居中
-    popWindow();
     // 九宫格图片
     setPicSize();
     // 响应式图片
@@ -16,31 +14,40 @@ $(function() {
     setLeftNavSize();
     //右侧框架
     setframeContentSize();
-    $(window).bind('resize',function(){
-        //窗口变动实时更新代码，请写在这里
-        setLeftNavSize();
-        setframeContentSize();
-    });
 });
 /* 
     name:弹出窗口
     date:2016-12-28
     author:吴明姜
 */
-function popWindow(){
+function popWindow(winobj,width,height){
+    $('body').append('<div class="shade"></div>');
+    winobj.show();
     // 设置弹窗内容最大高度
-    $('.pop-content').css('max-height', $(window).height()*0.7 + 'px');
-    $(window).on('resize',function() {
-        // 设置弹框div位置
-        $('.pop-wrap').each(function(){
-            setPosition($(this));
-        });
-        setPosition($('.tipsPop-wrap'));
-        // 图片自适应
-        responsiveImg();
+    if (height) {
+        $('.pop-content').css('height', height);
+    }else if (height=='auto' || !height) {}{
+        $('.pop-content').css('max-height', $(window).height()*0.7 + 'px');
+    }
+    if (width) {
+        winobj.css('width',width);
+    }else{
+        winobj.css('width','50%');
+    }
+    setPositionCenter(winobj);
+    var timer=0;
+    $(window).bind('resize',function(){
+        if(timer)
+        {
+            clearTimeout(timer);
+            timer=0;
+        }
+        timer=setTimeout(function(){
+            setPositionCenter(winobj);
+        },300);
     });
     $('.pop-close').click(function() {
-        $('.shade').hide();
+        $('.shade').remove();
         $(this).parent().parent().hide();
     });
 }
@@ -56,42 +63,57 @@ function responsiveImg(){
     var ph=$(this).parent().height();
     var tw=$(this).width();
     var th=$(this).height();
-    console.log(tw/th+'----'+pw/ph);
     if (tw/th>=pw/ph) {
-        $(this).css('height','100%');
-        $(this).css('width','auto');
-        $(this).css('marginTop','auto');
+        var css={'height':'100%','width':'auto','marginTop':'auto'};
+        $(this).css(css);
         $(this).css('marginLeft',(parseInt($(this).parent().width()) - $(this).width())/2 + 'px');
      }else{
-        $(this).css('width','100%');
-        $(this).css('height','auto');
-        $(this).css('marginLeft','auto');
+        var css={'height':'auto','width':'100%','marginLeft':'auto'};
+        $(this).css(css);
         $(this).css('marginTop',(parseInt($(this).parent().height()) - $(this).height())/2 + 'px');
     }
     });
+    resizefun(responsiveImg);
 }
 /* 
     name:设置居中位置
     date:2016-12-28
     author:吴明姜
 */
-function setPosition(pop) {
-    pop.css('top', ($(window).height() - pop.height()) / 2 + 'px');
-    pop.css('left', ($(window).width() - pop.width()) / 2 + 'px');
+function setPositionCenter(pop) {
+    var pcss={'top':'','left':''};
+    pcss.top=($(window).height() - pop.height()) / 2 + 'px';
+    pcss.left=($(window).width() - pop.width()) / 2 + 'px';
+    pop.css(pcss);
+}
+/* 
+    name:设置居上位置
+    date:2017-01-11
+    author:吴明姜
+*/
+function setPositionTop(pop) {
+    var pcss={'top':'','left':''};
+    pcss.top='10%';
+    pcss.left=($(window).width() - pop.width()) / 2 + 'px';
+    pop.css(pcss);
 }
 /* 
     name:操作提示弹窗
     date:2016-12-28
     author:吴明姜
 */
-function tipsPop(type,content,time){
+function tipsPop(type,content,time,position){
     var innertxt='<div class="tipsPop-wrap">'+
         '<i class="tipsPop-close"></i>'+
         '<p class="{{type}}"><i></i>{{content}}</p>'+
     '</div>';
     $('body').append(innertxt.replace('{{type}}',type)
         .replace('{{content}}',content));
-    setPosition($('.tipsPop-wrap'));
+    if (position=='center' || position==null || position=='') {
+        setPositionCenter($('.tipsPop-wrap'));
+    }else if(position=='top') {
+        setPositionTop($('.tipsPop-wrap'));
+    }
     // 淡出
     $('.tipsPop-close').click(function() {
         $(this).parent().fadeTo("normal", 0.01, function(){
@@ -100,7 +122,12 @@ function tipsPop(type,content,time){
             });
         });
     });
-    setTimeout(function(){
+    var timer=0;
+    if (timer) {
+        clearTimeout(timer);
+        timer=0;
+    }
+    timer=setTimeout(function(){
         $('.tipsPop-wrap').fadeTo("normal", 0.01, function(){
             $(this).slideUp("slow", function() {
                 $(this).remove();
@@ -162,7 +189,15 @@ function defaultLeftNav(){
             $('.slide-nav-btn').removeClass('on');
         }
         
-        $(".frame-content").attr("src",$(this).attr('url'));
+        // 添加current
+        if($(this).parent().attr('class')=='first-nav-li'){
+            $('.first-nav-li').removeClass('current');
+            $(this).parent().addClass('current');
+        }
+
+        if ($(this).attr('url') && $(this).attr('url')!='') {
+            $(".frame-content").attr("src",$(this).attr('url'));
+        }
         e.stopPropagation();
     });
     $('.slide-nav-btn').bind('click',function(){
@@ -191,6 +226,7 @@ function setLeftNavSize(){
     $('.default-slide-nav-wrap').css('height',$(window).height()-$('.default-head-content').height()-1+'px');
     // 设置导航项高度
     $('.default-slide-nav').css('height',$(window).height()-$('.default-head-content').height()-$('.slide-nav-top').height()-1+'px');
+    resizefun(setLeftNavSize);
 }
 /* 
     name:iframe右框架
@@ -201,9 +237,24 @@ function setframeContentSize(){
     // 设置右框架高度
     $('.default-right-content').css('height',$(window).height()-$('.default-head-content').height()-1+'px')
     .css('width',$(window).width()-$('.default-slide-nav-wrap').width()+'px');
-    
+    resizefun(setframeContentSize);
 }
-
+/* 
+    name:窗口resize函数，设置定时器减轻负荷
+    date:2017-01-07
+    author:吴明姜
+*/
+function resizefun(fun){
+    var timer=0;
+    $(window).bind('resize',function(){
+        if(timer)
+        {
+            clearTimeout(timer);
+            timer=0;
+        }
+        timer=setTimeout(fun,300);
+    });
+}
 
 
 

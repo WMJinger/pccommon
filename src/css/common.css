@@ -199,13 +199,13 @@ body {
 }
 .tipsPop-close {
   display: inline-block;
-  width: 14px;
-  height: 13px;
+  width: 20px;
+  height: 20px;
   position: absolute;
   right: 14px;
-  top: 21px;
+  top: 16px;
   cursor: pointer;
-  background: url("../images/icon1.png") 0 0 no-repeat;
+  background: url("../images/icon.png") -76px -22px no-repeat;
 }
 .tipsPop-wrap p {
   border-radius: 8px;
@@ -803,4 +803,56 @@ body {
   width: 100%;
   height: 100%;
   border-width: 0;
+}
+/* 
+	name:内容弹窗样式
+	date:2017-01-11
+	author:吴明姜
+*/
+.shade {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  opacity: 0.4;
+  filter: alpha(opacity=40);
+  z-index: 6;
+}
+.pop-wrap {
+  position: fixed;
+  font-size: 12px;
+  z-index: 7;
+  box-shadow: 0 0 10px #333;
+  display: none;
+  transition: all 0.3s;
+  border-radius: 2px;
+  background-color: #fff;
+}
+.pop-title {
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+  padding-left: 20px;
+  background-color: #008df9;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 2px 2px 0 0;
+}
+.pop-title .pop-close {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 20px;
+  top: 14px;
+  background: url("../images/icon.png") -76px -22px no-repeat;
+}
+.pop-content {
+  padding: 20px;
+  text-align: left;
+  overflow-y: auto;
+  line-height: 30px;
+  color: #585858;
 }
