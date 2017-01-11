@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="css/common.css"/>
+	<meta charset="utf-8"/>
+	<style type="text/css">
+		body{padding: 14px;}
+		h2{
+			font-size: 16px;
+			margin-bottom: 10px;
+			padding-top: 8px;
+			padding-bottom: 8px;
+			border-bottom: 1px solid #e4e4e4;
+		}
+		.section{
+			margin-bottom: 20px;
+		}
+		#sudoku{
+			width: 400px;
+		}
+	</style>
+</head>
+<body>
+<h2>操作提示弹窗-居中</h2>
+<div class="section">
+	<a class="btn btn1" href="javascript:tipsPop('done','提交成功！',2000);">成功</a>
+	<a class="btn btn2" href="javascript:tipsPop('alarm','不可提交！',2000);">警告</a>
+	<a class="btn btn1" href="javascript:tipsPop('error','提交失败！',2000);">错误</a>
+</div>
+
+<script src="js/libjs/jquery-1.11.1.min.js"></script>
+<script src="js/common.js"></script>
+</body>
+</html>
