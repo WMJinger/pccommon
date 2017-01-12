@@ -5,16 +5,13 @@
 	<link rel="stylesheet" type="text/css" href="css/common.css"/>
 	<meta charset="utf-8"/>
 	<style type="text/css">
-		body{padding: 14px;}
 		h2{
 			font-size: 16px;
-			margin-bottom: 10px;
-			padding-top: 8px;
-			padding-bottom: 8px;
+			padding: 14px;
 			border-bottom: 1px solid #e4e4e4;
 		}
 		.section{
-			margin-bottom: 20px;
+			padding:20px 14px;
 		}
 		#sudoku{
 			width: 400px;
@@ -36,12 +33,38 @@
 </div>
 <h2>内容提示弹窗-可设置宽高</h2>
 <div class="section">
-	<a class="btn btn1" href="javascript:popWindow($('#pop1'),'400px','');">子框架内居中</a>
+	<a class="btn btn3" href="javascript:popWindow($('#pop1'),'400px','');">子框架内居中</a>
 	<div class="pop-wrap" id="pop1">
 		<div class="pop-title">提示<a href="javascript:;" class="pop-close"></a></div>
 		<div class="pop-content">弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容弹窗内容<p style='margin:200px'>fdaghdfhg</p>vsrherherh弹窗内容弹窗内容弹窗内容</div>
 	</div>
-	<!-- <a class="btn btn1" href="javascript:parent.document.popWindow($('#pop1'),'400px','');">父框架内居中</a> -->
+</div>
+<h2>移入提示</h2>
+<div class="section">
+	<span class="hover-tips-right-wrap btn btn4">右提示
+		<div class="hover-tips">
+			<i class="triangle"></i>
+			<div style='width:120px;'>我是提示信息，提示信息</div>
+		</div>
+	</span>
+	<span class="hover-tips-left-wrap btn btn4">左提示
+		<div class="hover-tips">
+			<i class="triangle"></i>
+			<div style='width:120px;'>我是提示信息，提示信息</div>
+		</div>
+	</span>
+	<span class="hover-tips-top-wrap btn btn4">上提示
+		<div class="hover-tips">
+			<i class="triangle"></i>
+			<div style='width:120px;'>我是提示信息，提示信息</div>
+		</div>
+	</span>
+	<span class="hover-tips-bottom-wrap btn btn4">下提示
+		<div class="hover-tips">
+			<i class="triangle"></i>
+			<div style='width:120px;'>我是提示信息，提示信息</div>
+		</div>
+	</span>
 </div>
 <script src="js/libjs/jquery-1.11.1.min.js"></script>
 <script src="js/common.js"></script>

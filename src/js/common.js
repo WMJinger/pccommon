@@ -22,7 +22,6 @@ $(function() {
 */
 function popWindow(winobj,width,height){
     $('body').append('<div class="shade"></div>');
-    winobj.show();
     // 设置弹窗内容最大高度
     if (height) {
         $('.pop-content').css('height', height);
@@ -35,6 +34,7 @@ function popWindow(winobj,width,height){
         winobj.css('width','50%');
     }
     setPositionCenter(winobj);
+    winobj.show();
     var timer=0;
     $(window).bind('resize',function(){
         if(timer)
