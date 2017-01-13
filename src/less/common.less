@@ -63,6 +63,13 @@ body{
 	-webkit-box-shadow: 0 0 10px rgba(0,0,0,.15);
 }
 // --------shadow style E-----
+.cfloat{
+	clear: both;
+	height:0px;
+	width:0px;
+	opacity:0;
+	filter:alpha(opacity=0);
+}
 /* 
 	name:按钮样式
 	date:2016-12-28
@@ -767,6 +774,7 @@ body{
 }
 .default-slide-nav .first-nav-li{
 	line-height: 34px;
+	transition:all 0.3s;
 }
 .default-slide-nav .first-nav-li div{
 	position:relative;
@@ -955,3 +963,370 @@ body{
     border-right: 6px solid transparent;
     border-bottom: 9px solid @hover-tips-bgcolor;
 }
+/* 
+	name:横向选项卡
+	date:2017-01-12
+	author:吴明姜
+*/
+.hor-default-tab{
+	position:relative;
+	border-top: 1px solid @border-color;
+	.hor-tab-li{
+		float: left;
+	}
+	.hor-tab-li-txt{
+		display:inline-block;
+		height:@txt-height;
+		line-height: @txt-height;
+		padding:0 @txt-form-gap;
+		background-color: #fafafa;
+		border-top: 2px solid #fafafa;
+		cursor:pointer;
+	}
+	.hor-tab-li:hover .hor-tab-li-txt,
+	.hor-tab-li.current .hor-tab-li-txt{
+		border-top:2px solid @main-color;
+		background-color: #fff;
+	}
+	.hor-tab-li-content{
+		display:none;
+		position:absolute;
+		left:0px;
+		top:@txt-height;
+		width:100%;
+		min-height: 30px;
+		background-color: #fff;
+	}
+	.hor-tab-li:hover .hor-tab-li-content,
+	.hor-tab-li.current .hor-tab-li-content{
+		display:block;
+	}
+}
+.hor-default-tab:after{
+	content:'';
+	display:block;
+	.cfloat;
+}
+/* 
+	name:横向选项卡-超出滚动
+	date:2017-01-13
+	author:吴明姜
+*/
+.hor-scroll-tab-wrap{
+	position:relative;
+	padding-top: @txt-height;
+}
+.hor-scroll-tab{
+    height: @txt-height;
+    width:100%;
+    position: absolute;
+    left:0;
+    top:0;
+    /*hack 压缩inline元素间隙*/
+  	font-size: 0;
+  	border-top: 1px solid @border-color;
+}
+.scroll-tab-wrap {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  *position:relative;
+  vertical-align: middle;
+  max-width: 80%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.scroll-tab-bar{
+    position: relative;
+    left:0;
+}
+.scroll-tab-wrap ul {
+  display: inline-block;
+  *display: inline;
+}
+.scroll-tab-preview,
+.scroll-tab-next,
+.scroll-tab-li{
+  vertical-align: middle;
+  display: inline-block;
+  *display: inline;
+  zoom: 1;
+  height: 38px;
+  line-height: 38px;
+  width: 96px;
+  border-top: 2px solid #fafafa;
+  border-left:1px solid #fafafa;
+  border-right:1px solid #fafafa;
+  border-bottom:1px solid #fafafa;
+  background-color: #fafafa;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 14px;
+  cursor: pointer;
+}
+.scroll-tab-preview,
+.scroll-tab-next{
+  border: 1px solid @border-color;
+}
+
+.scroll-tab-li.current,
+.scroll-tab-li:active{
+  border-top-color: @main-color;
+  border-bottom: 1px solid #fff;
+  background-color: #fff;
+}
+.scroll-tab-preview.current,
+.scroll-tab-next.current,
+.scroll-tab-preview:active,
+.scroll-tab-next:active{
+  background-color: #fff;
+  border-bottom: 1px solid #fff;
+}
+.scroll-tab-li {
+  position: relative;
+  margin-left: -1px;
+  color: #6c757a;
+}
+.scroll-tab-li:last-child {
+  border-right: none;
+}
+.scroll-tab-preview,
+.scroll-tab-next{
+   display: none;
+  width: 20px;
+  color: #6c757a;
+}
+.scroll-tab-li-con{
+	padding:@txt-form-gap;
+	display:none;
+}
+.scroll-tab-li-con.current{
+	display:block;
+}
+
+
+
+
+
+/* 
+	name:双向选项卡
+	date:2017-01-12
+	author:吴明姜
+*/
+.caseWrap{
+  position: relative;
+  margin-top: 60px;
+  margin-bottom: 80px;
+}
+.caseMenu{
+  width: 230px;
+}
+.caseMenu>li{
+  height: 60px;
+  width: 100%;
+  line-height: 60px;
+  text-align: center;
+  cursor: pointer;
+}
+.caseMenu>li:hover,
+.caseMenu>li.current{
+  background-color: #03a9f5;
+}
+.caseMenu>li span.caseMenuName{
+  font-size: 16px;
+  color: #5d5d5d;
+  vertical-align: middle;
+}
+.caseMenu>li:hover span.caseMenuName,
+.caseMenu>li.current span.caseMenuName{
+  color: #fff;
+}
+.caseMenu>li>i{
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+  vertical-align: middle;
+  background-repeat: no-repeat;
+  background-image: url(../images/comicon.png)
+}
+.caseIco1{
+  background-position: 0px -23px;
+}
+.caseMenu>li:hover .caseIco1,
+.caseMenu>li.current .caseIco1{
+  background-position: 0 1px;
+}
+.caseIco2{
+  background-position: 0px -75px;
+}
+.caseMenu>li:hover .caseIco2,
+.caseMenu>li.current .caseIco2{
+  background-position: 0 -50px;
+}
+.caseIco3{
+  background-position: 0px -125px;
+}
+.caseMenu>li:hover .caseIco3,
+.caseMenu>li.current .caseIco3{
+  background-position: 0 -99px;
+}
+.caseIco4{
+  background-position: 0px -180px;
+}
+.caseMenu>li:hover .caseIco4,
+.caseMenu>li.current .caseIco4{
+  background-position: 0 -153px;
+}
+
+.caseIco5{
+  background-position: 0px -238px;
+}
+.caseMenu>li:hover .caseIco5,
+.caseMenu>li.current .caseIco5{
+  background-position: 0 -208px;
+}
+.caseIco6{
+  background-position: 0px -297px;
+}
+.caseMenu>li:hover .caseIco6,
+.caseMenu>li.current .caseIco6{
+  background-position: 0 -269px;
+}
+.caseIco7{
+  background-position: 0px -355px;
+}
+.caseMenu>li:hover .caseIco7,
+.caseMenu>li.current .caseIco7{
+  background-position: 0 -326px;
+}
+.caseTab{
+  height: 60px;
+}
+.caseTab>li{
+  float: left;
+  height: 100%;
+  line-height: 60px;
+  box-sizing:border-box;
+  border: 1px solid #dfdfdf;
+  margin-left: -1px;
+  text-align: center;
+  cursor: pointer;
+}
+.caseTab>li:hover,
+.caseTab>li.current{
+  border-bottom-width: 0;
+  border-left: 1px solid #dfdfdf;
+  border-right: 1px solid #dfdfdf;
+}
+.caseTab>li:first-child:hover,
+.caseTab>li:first-child.current{
+  border-bottom-width: 0;
+  border-left-width:0;
+  border-right: 1px solid #dfdfdf;
+}
+.caseTab>li:last-child:hover,
+.caseTab>li:last-child.current{
+  border-bottom-width: 0;
+  border-right-width:0;
+  border-left: 1px solid #dfdfdf;
+}
+.caseTab>li>span{
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+  border-top: 2px solid transparent;
+}
+.caseTab>li:hover>span,
+.caseTab>li.current>span{
+  border-top: 2px solid #03a9f5;
+}
+.threeli>li{
+  width: 33.33%;
+}
+.twoli>li{
+  width: 50%;
+}
+.fourli>li{
+  width: 25%;
+}
+.caseContent,
+.caseContentEmpty{
+  position: absolute;
+  left: 0;
+  top: 60px;
+  width: 955px;
+  padding: 50px;
+  height: 360px;
+  line-height: 26px;
+  font-size: 15px;
+  overflow-y: auto;
+  box-sizing:border-box;
+}
+.caseContent{
+  display: none;
+  z-index: 2;
+  background-color: #fff;
+  text-align: left;
+}
+.caseContentEmpty{
+  z-index: 1;
+  line-height: 200px;
+  letter-spacing: 10px;
+  font-size: 24px;
+  color: #aaa;
+  background-color: #fff;
+}
+.caseTab>li.current>.caseContent{
+  display: block;
+}
+.caseContent p{
+  text-indent: 30px;
+}
+.caseTabWrap,
+.caseMenuEmpty{
+  position: absolute;
+  top: 0;
+  left: 242px;
+  width: 958px;
+  height: 100%;
+}
+.caseTabWrap{
+  display: none;
+  background-color: #fff;
+  z-index: 2;
+}
+.caseMenuEmpty{
+  z-index: 1;
+  line-height: 350px;
+  letter-spacing: 10px;
+  font-size: 24px;
+  color: #aaa;
+  background-color: #efefef;
+}
+.caseMenu>li.current .caseTabWrap{
+  display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

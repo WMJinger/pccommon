@@ -14,6 +14,8 @@ $(function() {
     setLeftNavSize();
     //右侧框架
     setframeContentSize();
+    //滚动选项卡
+    horScrollTab($('#scrollTab1'));
 });
 /* 
     name:弹出窗口
@@ -255,9 +257,59 @@ function resizefun(fun){
         timer=setTimeout(fun,300);
     });
 }
-
-
-
+/* 
+    name:横向简单选项卡-超出滚动
+    date:2017-01-13
+    author:吴明姜
+*/
+function horScrollTab(obj){
+    var scrollTabWrap=obj.find('.scroll-tab-wrap');
+    var scrollTabLi=obj.find('.scroll-tab-li');
+    var scrollTabContent=obj.find('.scroll-tab-li-con');
+    var scrollTab=obj.find('.hor-scroll-tab');
+    var scrollBar=obj.find('.scroll-tab-bar');
+    scrollTabWrap.on('click', '.scroll-tab-li', function() {
+        scrollTabLi.removeClass('current');
+        $(this).addClass('current');
+        scrollTabContent.hide();
+        scrollTabContent.eq($(this).index()).show();
+    });
+    if (scrollTabLi.width() * scrollTabLi.length > scrollTabWrap.width()) {
+        obj.find('.scroll-tab-preview').css('display', 'inline-block');
+        obj.find('.scroll-tab-next').css('display', 'inline-block');
+    }
+    // 左滑动
+    var moveGap = scrollTabLi.width();
+    scrollTab.on('click', '.scroll-tab-next', function() {
+        var endPoint = scrollBar.width() - scrollTabWrap.width(); //左滑动终点
+        var realLeft = scrollBar.position().left - 20; //实际偏移量
+        if (-realLeft > endPoint || (endPoint + realLeft) <= moveGap) {
+            scrollBar.animate({
+                left: -endPoint + 'px'
+            }, 200);
+        } else {
+            scrollBar.animate({
+                left: (scrollBar.position().left - moveGap) + 'px'
+            }, 200);
+            moveGap += 1;
+        }
+    });
+    // 右滑动
+    scrollTab.on('click', '.scroll-tab-preview', function() {
+        var endPoint = 0; //右滑动终点
+        var realLeft = scrollBar.position().left - 20; //实际偏移量
+        if (-realLeft < moveGap) {
+            scrollBar.animate({
+                left: endPoint + 'px'
+            }, 200);
+        } else {
+            scrollBar.animate({
+                left: (scrollBar.position().left + moveGap) + 'px'
+            }, 200);
+            moveGap += 1;
+        }
+    });
+}
 
 
 
