@@ -17,31 +17,35 @@
 			width: 400px;
 		}
 	</style>
+	<script src="js/libjs/jquery-1.11.1.min.js"></script>
+	<script src="js/common.js"></script>
 </head>
 <body>
 <h2>横向简单选项卡</h2>
 <div class="section">
-	<ul class="hor-default-tab">
-		<li class="hor-tab-li current">
-			<span class="hor-tab-li-txt">选项一</span>
-			<div class="hor-tab-li-content">
-				这里是选项一的内容内容
-			</div>
-		</li>
-		<li class="hor-tab-li">
-			<span class="hor-tab-li-txt">选项二</span>
-			<div class="hor-tab-li-content">
-				这里是选项二的内容内容
-			</div>
-		</li>
-		<li class="hor-tab-li">
-			<span class="hor-tab-li-txt">选项三</span>
-			<div class="hor-tab-li-content">
-				这里是选项三的内容内容
-			</div>
-		</li>
-	</ul>
-	<i class="cfloat"></i>
+	<div class="hor-default-wrap">
+		<ul class="hor-default-tab">
+			<li class="hor-tab-li current">
+				<span class="hor-tab-li-txt">选项一</span>
+			</li>
+			<li class="hor-tab-li">
+				<span class="hor-tab-li-txt">选项二</span>
+			</li>
+			<li class="hor-tab-li">
+				<span class="hor-tab-li-txt">选项三</span>
+			</li>
+		</ul>
+		<i class="cfloat"></i>
+		<div class="hor-tab-li-content current">
+			这里是选项一的内容内容
+		</div>
+		<div class="hor-tab-li-content">
+			这里是选项二的内容内容
+		</div>
+		<div class="hor-tab-li-content">
+			这里是选项三的内容内容
+		</div>
+	</div>
 </div>
 		
 <h2>横向简单选项卡-超出滚动</h2>
@@ -100,81 +104,89 @@
 			我是选项一内容
 		</div>
 	</div>
+	<script type="text/javascript">
+		horScrollTab($('#scrollTab1'),'click');
+	</script>
 </div>
 
-<h2>双向选项卡</h2>
+<h2>纵向多级选项卡</h2>
 <div class="section">
-	<div class="caseWrap">
-		<ul class="caseMenu">
-			<li class="current"><i class="caseIco1"></i>
-				<span class="caseMenuName">金&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;融</span>
-				<div class="caseTabWrap">
-					<ul class="caseTab threeli">
-						<li class="current">
-							<span>反欺诈、风控评分</span>
-							<div class="caseContent">
-								<p>反欺诈和风控评分是信贷和信用卡审批流程中的关键环节，用来发现并且拒绝有高欺诈风险、信用评价低的申请人。很多机构自身风控能力较弱，识别欺诈客户水平低。另一方面，相当一部分贷款、信用卡申请人没有金融方面的历史记录，需要用大数据来帮助确认申请人风险。为了解决上述行业痛点，合作伙伴抓住中国电信大数据开放合作契机，根据电信数据以及自有数据开发风控、反欺诈模型，P2P平台，消费金融公司，汽车金融公司等提供申请人总体风险评级、反欺诈评级，主要针对个人信贷场景。</p>
-								<p>住中国电信大数据开放合作契机，根据电信数据以及自有数据开发风控、反欺诈模型，P2P平台，消费金融公司，汽车金融公司等提供申请人总体风险评级、反欺诈评级，主要针对个人信贷场景。(300字符)</p>
-								<p>住中国电信大数据开放合作契机，根据电信数据以及自有数据开发风控、反欺诈模型，P2P平台，消费金融公司，汽车金融公司等提供申请人总体风险评级、反欺诈评级，主要针对个人信贷场景。(300字符)</p>
-							</div>
-							<!-- 空提示 每个层级加一个就可以-->
-							<div class="caseContentEmpty">这里没有东西哦~~</div>
-						</li>
-						<li>
-							<span>信用租机</span>
-							<div class="caseContent">
-								<p>反欺诈和风控评分是信贷和信用卡审批流程中的关键环节，用来发现并且拒绝有高欺诈风险、信用评价低的申请人。很多机构自身风控能力较弱，识别欺诈客户水平低。另一方面，相当一部分贷款、信用卡申请人没有金融方面的历史记录，需要用大数据来帮助确认申请人风险。为了解决上述行业痛点，合作伙伴抓住中国电信大数据开放合作契机，根据电信数据以及自有数据开发风控、反欺诈模型，P2P平台，消费金融公司，汽车金融公司等提供申请人总体风险评级、反欺诈评级，主要针对个人信贷场景。</p>
-							</div>
-						</li>
-						<li><span>反欺诈、风控评分</span></li>
-					</ul>
-				</div>
-				<!-- 空提示 加一个就可以-->
-				<div class="caseMenuEmpty">这里没有东西哦~~</div>
+	<div class="ver-tab-wrap">
+		<ul class="ver-tab-menu">
+			<li class="first-menu-li current">
+				<i class="computer-ico"></i>
+				<span class="ver-li-txt">选项一</span>
+				<ul>
+					<li class="first-menu-li">
+						<span class="ver-li-txt">选项1.1</span>
+						<ul>
+							<li class="first-menu-li">
+								<span class="ver-li-txt">选项1.1.1</span>
+							</li>
+							<li class="first-menu-li">
+								<span class="ver-li-txt">选项1.1.2222222222222</span>
+							</li>
+						</ul>
+					</li>
+					<li class="first-menu-li">
+						<span class="ver-li-txt">选项1.2</span>
+					</li>
+					<li class="first-menu-li">
+						<span class="ver-li-txt">选项1.3</span>
+					</li>
+				</ul>
 			</li>
-			<li><i class="caseIco2"></i>
-				<span class="caseMenuName">交&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通</span>
-				<div class="caseTabWrap">
-					<ul class="caseTab twoli">
-						<li class="current">
-							<span>反欺诈、风控评分</span>
-							<div class="caseContent">
-								<p>反欺诈和风控评分是信贷和信用卡审批流程中的关键环节，用来发现并且拒绝有高欺诈风险、信用评价低的申请人。很多机构自身风控能力较弱，识别欺诈客户水平低。另一方面，相当一部分贷款、信用卡申请人没有金融方面的历史记录，需要用大数据来帮助确认申请人风险。为了解决上述行业痛点，合作伙伴抓住中国电信大数据开放合作契机，根据电信数据以及自有数据开发风控、反欺诈模型，P2P平台，消费金融公司，汽车金融公司等提供申请人总体风险评级、反欺诈评级，主要针对个人信贷场景。</p>
-								<p>住中国电信大数据开放合作契机，根据电信数据以及自有数据开发风控、反欺诈模型，P2P平台，消费金融公司，汽车金融公司等提供申请人总体风险评级、反欺诈评级，主要针对个人信贷场景。(300字符)</p>
-								<p>住中国电信大数据开放合作契机，根据电信数据以及自有数据开发风控、反欺诈模型，P2P平台，消费金融公司，汽车金融公司等提供申请人总体风险评级、反欺诈评级，主要针对个人信贷场景。(300字符)</p>
-							</div>
-							<!-- 空提示 每个层级加一个就可以-->
-							<div class="caseContentEmpty">这里没有东西哦~~</div>
-						</li>
-						<li><span>反欺诈、风控评分</span></li>
-					</ul>
-				</div>
+			<li class="first-menu-li">
+				<span class="ver-li-txt">选项二</span>
 			</li>
-			<li><i class="caseIco3"></i><span class="caseMenuName">保&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;险</span>
-				<div class="caseTabWrap">
-					<ul class="caseTab fourli">
-						<li class="current">
-							<span>反欺诈、风控评分</span>
-							<div class="caseContent">
-								<p>反欺诈和风控评分是信贷</p>
-							</div>
-							<!-- 空提示 每个层级加一个就可以-->
-							<div class="caseContentEmpty">这里没有东西哦~~</div>
-						</li>
-						<li><span>反欺诈、风控评分</span></li>
-						<li><span>fga</span></li>
-						<li><span>bgsf</span></li>
-					</ul>
+		</ul>
+		<div class="ver-tab-content">
+			我是选项一内容
+		</div>
+	</div>
+</div>
+
+<h2>双向选项卡-需设定内容高度</h2>
+<div class="section">
+	<div class="both-tab-wrap">
+		<ul class="left-tab-menu">
+			<li class="left-tab-menu-li current">
+				<span class="left-tab-menu-li-txt">选项一</span>
+				<div class="right-tab-wrap">
+				<ul class="right-tab-menu">
+					<li class="right-tab-li current">
+						<span class="right-tab-li-txt">选项1.1</span>
+						<div class="right-tab-li-con">
+							<p>反欺诈和风控评分是信贷和信用卡审批流程中的关键环节，用来发现并且拒绝有高欺诈风险、信用评价低的申请人。很多机构自身风控能力较弱，识别欺诈客户水平低
+						</div>
+					</li>
+					<li class="right-tab-li">
+						<span class="right-tab-li-txt">选项1.2</span>
+						<div class="right-tab-li-con">
+							<p>反欺诈和风控评分是信贷和信用卡审批流程中的关键环节，用来发现并且拒绝有高欺诈风险、信用评价低的申请人。很多机构自身风控能力较弱，识别欺诈客户水平低。另一方面，相当一部分贷款、信用卡申请人没有金融方面的历史记录，需要用大数据来帮助确认申请人风险。为了解决上述行业痛点，合作伙伴抓住中国电信大数据开放合作契机，根据电信数据以及自有数据开发风控、反欺诈模型，P2P平台，消费金融公司，汽车金融公司等提供申请人总体风险评级、反欺诈评级，主要针对个人信贷场景。</p>
+						</div>
+					</li>
+					<li class="right-tab-li">
+						<span class="right-tab-li-txt">选项1.3</span>
+					</li>
+				</ul>
 				</div>
 			</li>
-			<li><i class="caseIco4"></i><span class="caseMenuName">互&nbsp;&nbsp;联&nbsp;&nbsp;网</span></li>
-			<li><i class="caseIco5"></i><span class="caseMenuName">咨&nbsp;&nbsp;询&nbsp;&nbsp;类</span></li>
-			<li><i class="caseIco6"></i><span class="caseMenuName">广告媒体</span></li>
-			<li><i class="caseIco7"></i><span class="caseMenuName">手机终端</span></li>
+			<li class="left-tab-menu-li">
+				<span class="left-tab-menu-li-txt">选项二</span>
+				<div class="right-tab-wrap">
+					<ul class="right-tab-menu">
+						<li class="right-tab-li current">
+							<span class="right-tab-li-txt">选项2.1</span>
+							<div class="right-tab-li-con">
+								我是二级的二级
+							</div>
+						</li>
+					</ul>
+				</div>
+			</li>
 		</ul>
 	</div>
 </div>
-<script src="js/libjs/jquery-1.11.1.min.js"></script>
-<script src="js/common.js"></script>
 </body>
 </html>

@@ -14,8 +14,12 @@ $(function() {
     setLeftNavSize();
     //右侧框架
     setframeContentSize();
-    //滚动选项卡
-    horScrollTab($('#scrollTab1'));
+    //默认选项卡
+    defaultTab('click');
+    // 双向选项卡
+    bothDefaultTab('click');
+    // 竖向多级选项卡
+    verDefaultTab('click');
 });
 /* 
     name:弹出窗口
@@ -262,13 +266,13 @@ function resizefun(fun){
     date:2017-01-13
     author:吴明姜
 */
-function horScrollTab(obj){
+function horScrollTab(obj,event){
     var scrollTabWrap=obj.find('.scroll-tab-wrap');
     var scrollTabLi=obj.find('.scroll-tab-li');
     var scrollTabContent=obj.find('.scroll-tab-li-con');
     var scrollTab=obj.find('.hor-scroll-tab');
     var scrollBar=obj.find('.scroll-tab-bar');
-    scrollTabWrap.on('click', '.scroll-tab-li', function() {
+    scrollTabWrap.on(event, '.scroll-tab-li', function() {
         scrollTabLi.removeClass('current');
         $(this).addClass('current');
         scrollTabContent.hide();
@@ -310,11 +314,60 @@ function horScrollTab(obj){
         }
     });
 }
-
-
-
-
-
+/* 
+    name:横向简单选项卡
+    date:2017-01-16
+    author:吴明姜
+*/
+function defaultTab(event){
+    $('.hor-default-wrap').on(event, '.hor-tab-li', function() {
+        var pobj=$(this).parent().parent();
+        pobj.find('.hor-tab-li').removeClass('current');
+        $(this).addClass('current');
+        pobj.find('.hor-tab-li-content').hide();
+        pobj.find('.hor-tab-li-content').eq($(this).index()).show();
+    });
+}
+/* 
+    name:双向选项卡
+    date:2017-01-16
+    author:吴明姜
+*/
+function bothDefaultTab(event){
+    $('.left-tab-menu-li').bind(event,function(e){
+        $(this).parent().children('li').removeClass('current');
+        $(this).addClass('current');
+        $(this).find('.right-tab-wrap').children('li').removeClass('current');
+        $(this).find('.right-tab-wrap').children('li').eq(0).addClass('current');
+        $(this).find('.right-tab-wrap').show();
+        e.stopPropagation();
+    });
+    $('.right-tab-li').bind(event,function(e){
+        $(this).parent().children('li').removeClass('current');
+        $(this).addClass('current');
+        $(this).find('.right-tab-li-con').show();
+        e.stopPropagation();
+    });
+}
+/* 
+    name:竖向多级选项卡
+    date:2017-01-16
+    author:吴明姜
+*/
+function verDefaultTab(event){
+    $('.ver-tab-menu li').bind(event,function(e){
+        if($(this).children('ul').hasClass('on')){
+            $(this).children('ul').slideUp();
+            $(this).children('ul').removeClass('on');
+        }else{
+           $(this).children('ul').slideDown(); 
+           $(this).children('ul').addClass('on');
+        }
+        $('.ver-tab-menu li').removeClass('current');
+        $(this).addClass('current');
+        e.stopPropagation();
+    });
+}
 
 
 

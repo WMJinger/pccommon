@@ -24,11 +24,11 @@ body{
 // border-color
 @border-color:#e4e4e4;
 // main color
-@main-color:#60baff;
+@main-color:#63afe5;
 // complementary colors
-@sub-color1:#448AFF;
-@sub-color2:#FFC107;
-@sub-color3:#F57C00;
+@sub-color1:#ffc66b;
+@sub-color2:#ffc66b;
+@sub-color3:#64decf;
 // special color
 @warm-color:#FF5722;
 @error-color:#FF5252;
@@ -624,6 +624,38 @@ body{
 	SCROLLBAR-ARROW-COLOR: darken(@main-color,30%);
 }
 /* 
+	name:浅色滚动条
+	date:2017-01-16
+	note:仅支持谷歌
+	author:吴明姜
+*/
+.ligth-scroll::-webkit-scrollbar {
+	width: 7px;
+}
+.ligth-scroll::-webkit-scrollbar-thumb {
+	background-color:lighten(saturate(@main-color, -50%),10%);
+	background-clip: padding-box;
+	min-height: 28px;
+	padding: 100px 0;
+	box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1);
+	border-radius: 10px;
+}
+.ligth-scroll::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+}
+.ligth-scroll{
+	// 拖拽条颜色
+	SCROLLBAR-FACE-COLOR:lighten(saturate(@main-color, -50%),34%);
+	// 背景颜色
+	SCROLLBAR-TRACK-COLOR:lighten(saturate(@main-color, -50%),24%); 
+	// 上下箭头颜色
+	SCROLLBAR-ARROW-COLOR: lighten(saturate(@main-color, -50%),40%);
+	// 拖拽条描边颜色
+	scrollbar-shadow-color:lighten(saturate(@main-color, -50%),22%);
+}
+/* 
 	name:上下三角形图标
 	date:2017-01-04
 	author:吴明姜
@@ -798,6 +830,13 @@ body{
 	color:darken(@main-color,10%);
 	overflow:hidden;
 	text-overflow: ellipsis;
+	moz-user-select: -moz-none; 
+	-moz-user-select: none; 
+	-o-user-select:none; 
+	-khtml-user-select:none; 
+	-webkit-user-select:none; 
+	-ms-user-select:none; 
+	user-select:none;/*禁止选中文字*/ 
 }
 .default-slide-nav .first-nav-li .second-nav-li a:hover .nav-li-text{
 	color:@main-color;
@@ -968,7 +1007,7 @@ body{
 	date:2017-01-12
 	author:吴明姜
 */
-.hor-default-tab{
+.hor-default-wrap{
 	position:relative;
 	border-top: 1px solid @border-color;
 	.hor-tab-li{
@@ -990,15 +1029,10 @@ body{
 	}
 	.hor-tab-li-content{
 		display:none;
-		position:absolute;
-		left:0px;
-		top:@txt-height;
-		width:100%;
-		min-height: 30px;
+		padding:@txt-form-gap;
 		background-color: #fff;
 	}
-	.hor-tab-li:hover .hor-tab-li-content,
-	.hor-tab-li.current .hor-tab-li-content{
+	.hor-tab-li-content.current{
 		display:block;
 	}
 }
@@ -1104,214 +1138,188 @@ body{
 .scroll-tab-li-con.current{
 	display:block;
 }
-
-
-
-
-
 /* 
 	name:双向选项卡
 	date:2017-01-12
 	author:吴明姜
 */
-.caseWrap{
-  position: relative;
-  margin-top: 60px;
-  margin-bottom: 80px;
+.both-tab-wrap{
+	@left-tab-width:160px;
+	@right-con-height:360px;
+	min-height: @right-con-height;
+	.left-tab-menu{
+		position:relative;
+	}
+	.left-tab-menu-li{
+	  height:@txt-height;
+	  line-height: @txt-height;
+	  width:@left-tab-width;
+	  text-align: left;
+	  cursor: pointer;
+	}
+	.left-tab-menu-li-txt{
+	  position:relative;
+	  display:inline-block;
+	  height:100%;
+	  line-height: @txt-height;
+	  font-size: 14px;
+	  display:inline-block;
+	  width:(@left-tab-width)-(@txt-form-gap);
+	  color: @font-base-color;
+	  vertical-align: middle;
+	  text-align: center;
+	  z-index: 2;
+	}
+	.left-tab-menu-li:hover .left-tab-menu-li-txt,
+	.left-tab-menu-li.current .left-tab-menu-li-txt{
+	  background-color: lighten(@main-color,26%);
+	}
+	.right-tab-wrap{
+		position:absolute;
+		top:0;
+		left:0px;
+		width:100%;
+		border-top: 1px solid @border-color;
+		display:none;
+		z-index: 1;
+	}
+	.right-tab-menu{
+		position:relative;
+		margin-left: @left-tab-width;
+	}
+	.left-tab-menu-li.current .right-tab-wrap{
+		display:block;
+	}
+	.right-tab-li{
+		float: left;
+	}
+	.right-tab-li-txt{
+		display:inline-block;
+		height:@txt-height;
+		line-height: @txt-height;
+		padding:0 @txt-form-gap;
+		background-color: #fafafa;
+		border-top: 2px solid #fafafa;
+		cursor:pointer;
+	}
+	.right-tab-li:hover .right-tab-li-txt,
+	.right-tab-li.current .right-tab-li-txt{
+	  border-top-color: @main-color;
+	}
+	.right-tab-li-con{
+	  position: absolute;
+	  left: 0;
+	  top: @txt-height;
+	  width: 100%;
+	  height: (@right-con-height)-(@txt-height);
+	  line-height: normal;
+	  overflow-y: auto;
+	  box-sizing:border-box;
+	}
+	.right-tab-li-con{
+	  display: none;
+	  z-index: 2;
+	  background-color: #fff;
+	  text-align: left;
+	}
+	.right-tab-li.current .right-tab-li-con{
+  		display: block;
+	}
 }
-.caseMenu{
-  width: 230px;
+/* 
+	name:纵向选项卡
+	date:2017-01-16
+	author:吴明姜
+*/
+.ver-tab-wrap{
+	@left-menu-width:160px;
+	@left-con-minHeight:200px;
+	position:relative;
+	padding-left:@left-menu-width;
+	.ver-tab-menu{
+		position:absolute;
+		top:0;
+		left:0;
+		width:@left-menu-width;
+	}
+	.ver-tab-menu li{
+		display:block;
+	}
+	.ver-tab-menu li:hover{
+		background-color: lighten(@main-color,28%);
+	}
+	.ver-li-txt,
+	.ver-li-txt a{
+		display:block;
+		*display:inline-block;
+		width:100%;
+		cursor:pointer;
+		overflow:hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	.first-menu-li{
+		position:relative;
+		line-height: 30px;
+		padding-left:30px;
+	}
+	.first-menu-li.current>.ver-li-txt{
+		color:@main-color;
+	}
+	.first-menu-li i{
+		position:absolute;
+		top:6px;
+		left:4px;
+	}
+	.first-menu-li ul{
+		display:none;
+	}
+	.first-menu-li li{
+		line-height: 30px;
+		padding-left:24px;
+	}
+	.ver-tab-content{
+		min-height: @left-con-minHeight;
+		padding:0 @txt-form-gap;
+	}
 }
-.caseMenu>li{
-  height: 60px;
-  width: 100%;
-  line-height: 60px;
-  text-align: center;
-  cursor: pointer;
+/* 
+	name:表头固定
+	date:2017-01-16
+	author:吴明姜
+*/
+.fix-head-table{
+	@tbody-height:120px;
+	.tableBody{
+		height:@tbody-height;
+		overflow-y:auto;
+	}
 }
-.caseMenu>li:hover,
-.caseMenu>li.current{
-  background-color: #03a9f5;
+/* 
+	name:表格样式1
+	date:2017-01-16
+	author:吴明姜
+*/
+.table01{
+	table-layout: fixed;
+	width:100%;
+	*width:auto;
+	border-collapse: collapse;
+	tr th{
+		font-weight: normal;
+		padding:4px;
+		text-align: left;
+		border-bottom: 1px solid @border-color;
+	}
+	tr:hover td{
+		background-color: lighten(saturate(@main-color, -50%),28%);
+	}
+	tr td{
+		padding:4px;
+		text-align:left;
+	}
+	
 }
-.caseMenu>li span.caseMenuName{
-  font-size: 16px;
-  color: #5d5d5d;
-  vertical-align: middle;
-}
-.caseMenu>li:hover span.caseMenuName,
-.caseMenu>li.current span.caseMenuName{
-  color: #fff;
-}
-.caseMenu>li>i{
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  margin-right: 10px;
-  vertical-align: middle;
-  background-repeat: no-repeat;
-  background-image: url(../images/comicon.png)
-}
-.caseIco1{
-  background-position: 0px -23px;
-}
-.caseMenu>li:hover .caseIco1,
-.caseMenu>li.current .caseIco1{
-  background-position: 0 1px;
-}
-.caseIco2{
-  background-position: 0px -75px;
-}
-.caseMenu>li:hover .caseIco2,
-.caseMenu>li.current .caseIco2{
-  background-position: 0 -50px;
-}
-.caseIco3{
-  background-position: 0px -125px;
-}
-.caseMenu>li:hover .caseIco3,
-.caseMenu>li.current .caseIco3{
-  background-position: 0 -99px;
-}
-.caseIco4{
-  background-position: 0px -180px;
-}
-.caseMenu>li:hover .caseIco4,
-.caseMenu>li.current .caseIco4{
-  background-position: 0 -153px;
-}
-
-.caseIco5{
-  background-position: 0px -238px;
-}
-.caseMenu>li:hover .caseIco5,
-.caseMenu>li.current .caseIco5{
-  background-position: 0 -208px;
-}
-.caseIco6{
-  background-position: 0px -297px;
-}
-.caseMenu>li:hover .caseIco6,
-.caseMenu>li.current .caseIco6{
-  background-position: 0 -269px;
-}
-.caseIco7{
-  background-position: 0px -355px;
-}
-.caseMenu>li:hover .caseIco7,
-.caseMenu>li.current .caseIco7{
-  background-position: 0 -326px;
-}
-.caseTab{
-  height: 60px;
-}
-.caseTab>li{
-  float: left;
-  height: 100%;
-  line-height: 60px;
-  box-sizing:border-box;
-  border: 1px solid #dfdfdf;
-  margin-left: -1px;
-  text-align: center;
-  cursor: pointer;
-}
-.caseTab>li:hover,
-.caseTab>li.current{
-  border-bottom-width: 0;
-  border-left: 1px solid #dfdfdf;
-  border-right: 1px solid #dfdfdf;
-}
-.caseTab>li:first-child:hover,
-.caseTab>li:first-child.current{
-  border-bottom-width: 0;
-  border-left-width:0;
-  border-right: 1px solid #dfdfdf;
-}
-.caseTab>li:last-child:hover,
-.caseTab>li:last-child.current{
-  border-bottom-width: 0;
-  border-right-width:0;
-  border-left: 1px solid #dfdfdf;
-}
-.caseTab>li>span{
-  display: inline-block;
-  width: 100%;
-  height: 100%;
-  font-size: 16px;
-  border-top: 2px solid transparent;
-}
-.caseTab>li:hover>span,
-.caseTab>li.current>span{
-  border-top: 2px solid #03a9f5;
-}
-.threeli>li{
-  width: 33.33%;
-}
-.twoli>li{
-  width: 50%;
-}
-.fourli>li{
-  width: 25%;
-}
-.caseContent,
-.caseContentEmpty{
-  position: absolute;
-  left: 0;
-  top: 60px;
-  width: 955px;
-  padding: 50px;
-  height: 360px;
-  line-height: 26px;
-  font-size: 15px;
-  overflow-y: auto;
-  box-sizing:border-box;
-}
-.caseContent{
-  display: none;
-  z-index: 2;
-  background-color: #fff;
-  text-align: left;
-}
-.caseContentEmpty{
-  z-index: 1;
-  line-height: 200px;
-  letter-spacing: 10px;
-  font-size: 24px;
-  color: #aaa;
-  background-color: #fff;
-}
-.caseTab>li.current>.caseContent{
-  display: block;
-}
-.caseContent p{
-  text-indent: 30px;
-}
-.caseTabWrap,
-.caseMenuEmpty{
-  position: absolute;
-  top: 0;
-  left: 242px;
-  width: 958px;
-  height: 100%;
-}
-.caseTabWrap{
-  display: none;
-  background-color: #fff;
-  z-index: 2;
-}
-.caseMenuEmpty{
-  z-index: 1;
-  line-height: 350px;
-  letter-spacing: 10px;
-  font-size: 24px;
-  color: #aaa;
-  background-color: #efefef;
-}
-.caseMenu>li.current .caseTabWrap{
-  display: block;
-}
-
-
-
 
 
 
