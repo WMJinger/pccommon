@@ -1301,7 +1301,6 @@ body{
 	author:吴明姜
 */
 .table01{
-	table-layout: fixed;
 	width:100%;
 	*width:auto;
 	border-collapse: collapse;
@@ -1317,8 +1316,34 @@ body{
 	tr td{
 		padding:4px;
 		text-align:left;
+		overflow:hidden;
+		text-overflow: ellipsis;
+		word-wrap: break-word;
 	}
-	
+}
+table{
+	.child{
+		display:none;
+	}
+	.child td:first-child{
+		text-align: right;
+	}
+	.fold{
+		display:inline-block;
+		width:16px;
+		height:16px;
+		line-height: 13px;
+		border-radius:50%;
+		background-color: @sub-color3;
+		border:2px solid #fff;
+		color:#fff;
+		font-size: 15px;
+		font-weight: bold;
+		.pop-shadow;
+		text-align: center;
+		vertical-align: middle;
+		cursor:pointer;
+	}
 }
 
 

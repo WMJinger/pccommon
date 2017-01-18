@@ -20,6 +20,8 @@ $(function() {
     bothDefaultTab('click');
     // 竖向多级选项卡
     verDefaultTab('click');
+    // 响应式表格
+    responsiveTable($('#responsive-table'),'100',1);
 });
 /* 
     name:弹出窗口
@@ -241,8 +243,11 @@ function setLeftNavSize(){
 */
 function setframeContentSize(){
     // 设置右框架高度
-    $('.default-right-content').css('height',$(window).height()-$('.default-head-content').height()-1+'px')
-    .css('width',$(window).width()-$('.default-slide-nav-wrap').width()+'px');
+    var fcss={
+        'height':$(window).height()-$('.default-head-content').height()-1+'px',
+        'width':$(window).width()-$('.default-slide-nav-wrap').width()+'px'
+    }
+    $('.default-right-content').css(fcss);
     resizefun(setframeContentSize);
 }
 /* 
@@ -368,6 +373,92 @@ function verDefaultTab(event){
         e.stopPropagation();
     });
 }
+/* 
+    name:响应式表格改写,减少重绘次数
+    date:2017-01-17
+    argument：单元格最小宽度，每次自减个数，展开标志出现在第几列
+    author:吴明姜
+*/
+function responsiveTable(obj,minWidth,foldTd){
+    var _table=obj;
+    var oth_html=new Array();
+    //保存tr值
+    _table.find('th').each(function(i){
+        oth_html[i]=$(this).html();
+    });
+    // 保存td值
+    var tr_length=_table.find('tr').length-1;
+    var $td=_table.find('td');
+    var otd_html=new Array();
+    for(var i=0,k=0;i<tr_length;i++){//行
+        otd_html[i]=new Array(); 
+        for(var j=0;j<oth_html.length;j++){//列
+            otd_html[i][j]= _table.find('td').eq(k).html();
+            k++;
+        }
+    }
+    resizeTable(_table,oth_html,otd_html);
+    function resizeTable(tableObj,ths,tds){
+        //窗口变动时隐藏选项
+        tableObj.find('.child').hide();
+        $('.fold').html('+');
 
+        var otd_num=tableObj.find('tr').first().children('th').length;
+        var ave_td_w=$(window).width()/otd_num;
+        var tableTemp='';
+        var trTemp='',tdTemp='';
+        var snum=ths.length-parseInt($(window).width()/minWidth);//需缩放的td个数
+        if (snum<=0) {
+            snum=0;
+        }
+        // 拼接th行
+        for(var j=0;j<ths.length-snum;j++){
+            
+            trTemp=trTemp+'<th>'+ths[j]+'</th>';
+        }
+        tableTemp='<tr>'+trTemp+'</tr>';
+        trTemp='';
 
-
+        //拼接内容行
+        for(var i=0;i<tr_length;i++){   //表格除首行行数
+            // 原始行
+            for(var j=0;j<tds[i].length-snum;j++){
+                // 添加展开标记
+                if((j+1)==foldTd && snum!==0){
+                    tdTemp=tdTemp+'<td>'+tds[i][j]+'<span class="fold" foldId="'+i+'">+</span>'+'</td>';
+                }else{
+                    //拼接本行td
+                    tdTemp=tdTemp+'<td>'+tds[i][j]+'</td>';
+                }
+            }
+            tableTemp=tableTemp+'<tr>'+tdTemp+'</tr>';
+            tdTemp='';
+            // 收缩行
+            for(var k=tds[i].length-snum;k<tds[i].length;k++){
+                tdTemp=tdTemp+'<tr class="child" foldId="'+i+'"><td>'+ths[k]+'</td><td colspan='+(tds[i].length-snum-1)+'>'+tds[i][k]+'</td></tr>';
+            }
+            tableTemp=tableTemp+tdTemp;
+            tdTemp='';
+        }
+        tableObj.empty().append(tableTemp);
+    }
+    obj.on('click','.fold',function(e){
+        var span_fold_id=$(this).attr('foldId');
+        if ($(this).html()=='+') {
+            $(this).parent().parent().parent().find("tr[foldId='"+span_fold_id+"']").show();
+            $(this).html('-');
+        }else{
+            $(this).parent().parent().parent().find("tr[foldId='"+span_fold_id+"']").hide();
+            $(this).html('+');
+        }
+    });
+    $(window).bind('resize',function(){
+        var timer=0;
+        if(timer)
+        {
+            clearTimeout(timer);
+            timer=0;
+        }
+        timer=setTimeout(resizeTable(_table,oth_html,otd_html),300);
+    });
+}
