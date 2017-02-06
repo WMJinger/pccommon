@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 	<title></title>
@@ -17,6 +17,8 @@
 			width: 400px;
 		}
 	</style>
+	<script src="js/libjs/jquery-1.11.1.min.js"></script>
+	<script src="js/common.js"></script>
 </head>
 <body>
 <h2>表头固定</h2>
@@ -162,109 +164,81 @@
 			<td>17agioerfdnsjgoioergjoerjgoi</td>
 			<td>18agioerfdnsjgoioergjoerjgoi</td>
 		</tr>
-		<tr>
-			<td>测试</td>
-			<td>1549685</td>
-			<td>16549</td>
-			<td>48458</td>
-			<td>15649823</td>
-			<td>15649823</td>
-			<td>15649823</td>
-			<td>8</td>
-			<td>9</td>
-			<td>10</td>
-			<td>11</td>
-			<td>121212121212121212121212</td>
-			<td>13agioerfdnsjgoioergjoerjgoi</td>
-			<td>14agioerfdnsjgoioergjoerjgoi</td>
-			<td>15agioerfdnsjgoioergjoerjgoi</td>
-			<td>16agioerfdnsjgoioergjoerjgoi</td>
-			<td>17agioerfdnsjgoioergjoerjgoi</td>
-			<td>18agioerfdnsjgoioergjoerjgoi</td>
-		</tr>
-		<tr>
-			<td>测试</td>
-			<td>1549685</td>
-			<td>16549</td>
-			<td>48458</td>
-			<td>15649823</td>
-			<td>15649823</td>
-			<td>15649823</td>
-			<td>8</td>
-			<td>9</td>
-			<td>10</td>
-			<td>11</td>
-			<td>121212121212121212121212</td>
-			<td>13agioerfdnsjgoioergjoerjgoi</td>
-			<td>14agioerfdnsjgoioergjoerjgoi</td>
-			<td>15agioerfdnsjgoioergjoerjgoi</td>
-			<td>16agioerfdnsjgoioergjoerjgoi</td>
-			<td>17agioerfdnsjgoioergjoerjgoi</td>
-			<td>18agioerfdnsjgoioergjoerjgoi</td>
-		</tr>
-		<tr>
-			<td>测试</td>
-			<td>1549685</td>
-			<td>16549</td>
-			<td>48458</td>
-			<td>15649823</td>
-			<td>15649823</td>
-			<td>15649823</td>
-			<td>8</td>
-			<td>9</td>
-			<td>10</td>
-			<td>11</td>
-			<td>121212121212121212121212</td>
-			<td>13agioerfdnsjgoioergjoerjgoi</td>
-			<td>14agioerfdnsjgoioergjoerjgoi</td>
-			<td>15agioerfdnsjgoioergjoerjgoi</td>
-			<td>16agioerfdnsjgoioergjoerjgoi</td>
-			<td>17agioerfdnsjgoioergjoerjgoi</td>
-			<td>18agioerfdnsjgoioergjoerjgoi</td>
-		</tr>
-		<tr>
-			<td>测试</td>
-			<td>1549685</td>
-			<td>16549</td>
-			<td>48458</td>
-			<td>15649823</td>
-			<td>15649823</td>
-			<td>15649823</td>
-			<td>8</td>
-			<td>9</td>
-			<td>10</td>
-			<td>11</td>
-			<td>121212121212121212121212</td>
-			<td>13agioerfdnsjgoioergjoerjgoi</td>
-			<td>14agioerfdnsjgoioergjoerjgoi</td>
-			<td>15agioerfdnsjgoioergjoerjgoi</td>
-			<td>16agioerfdnsjgoioergjoerjgoi</td>
-			<td>17agioerfdnsjgoioergjoerjgoi</td>
-			<td>18agioerfdnsjgoioergjoerjgoi</td>
-		</tr>
-		<tr>
-			<td>测试</td>
-			<td>1549685</td>
-			<td>16549</td>
-			<td>48458</td>
-			<td>15649823</td>
-			<td>15649823</td>
-			<td>15649823</td>
-			<td>8</td>
-			<td>9</td>
-			<td>10</td>
-			<td>11</td>
-			<td>121212121212121212121212</td>
-			<td>13agioerfdnsjgoioergjoerjgoi</td>
-			<td>14agioerfdnsjgoioergjoerjgoi</td>
-			<td>15agioerfdnsjgoioergjoerjgoi</td>
-			<td>16agioerfdnsjgoioergjoerjgoi</td>
-			<td>17agioerfdnsjgoioergjoerjgoi</td>
-			<td>18agioerfdnsjgoioergjoerjgoi</td>
-		</tr>
 	</table>
 </div>
-<script src="js/libjs/jquery-1.11.1.min.js"></script>
-<script src="js/common.js"></script>
+<script type="text/javascript">
+	// 响应式表格
+    responsiveTable($('#responsive-table'),'100',1);
+</script>
+<h2>仿滑屏表格-ul-li(兼容IE8+)</h2>
+<div class="section">
+	<div class="table-slide" id="slideTable">
+		<a href="javascript:;" class="prev-btn enabled" id="prevQuestion">&lt;</a>
+		<a href="javascript:;" class="next-btn" id="nextQuestion">&gt;</a>
+		<ul class="table-slide-th">
+			<li class="fix-li">
+				<ul>
+					<li class="table-slide-td"><span class="td">字段一</span></li>
+					<li class="table-slide-td"><span class="td">字段二</span></li>
+				</ul>
+			</li>
+			<li class="slide-li">
+				<ul>
+					<li class="table-slide-td"><span class="td">字段三</span></li>
+					<li class="table-slide-td"><span class="td">字段四</span></li>
+					<li class="table-slide-td"><span class="td">字段五</span></li>
+					<li class="table-slide-td"><span class="td">字段六</span></li>
+					<li class="table-slide-td"><span class="td">字段七</span></li>
+					<li class="table-slide-td"><span class="td">字段八</span></li>
+					<li class="table-slide-td"><span class="td">字段九</span></li>
+					<li class="table-slide-td"><span class="td">字段十</span></li>
+				</ul>
+			</li>
+		</ul>
+		<ul class="table-slide-tr">
+			<li class="fix-li">
+				<ul>
+					<li class="table-slide-td"><span class="td">张盼</span></li>
+					<li class="table-slide-td"><span class="td">2016.02.02 10:00:002016.02.02 10:00:002016.02.02 10:00:002016.02.02 10:00:002016.02.02 10:00:002016.02.02 10:00:002016.02.02 10:00:00</span></li>
+				</ul>
+			</li>
+			<li class="slide-li">
+				<ul>
+					<li class="table-slide-td"><span class="td">既不是满意也不是不满意</span></li>
+					<li class="table-slide-td"><span class="td">字数测试请忽略字数测试请忽略字数测试请忽略字数测试请忽略字数测试请忽略字数测试请忽略字数测试请忽略字数测试请忽略</span></li>
+					<li class="table-slide-td"><span class="td">答案三</span></li>
+					<li class="table-slide-td"><span class="td">答案四</span></li>
+					<li class="table-slide-td"><span class="td">答案五</span></li>
+					<li class="table-slide-td"><span class="td">答案六</span></li>
+					<li class="table-slide-td"><span class="td">答案七</span></li>
+					<li class="table-slide-td"><span class="td">答案八</span></li>
+				</ul>
+			</li>
+		</ul>
+		<ul class="table-slide-tr">
+			<li class="fix-li">
+				<ul>
+					<li class="table-slide-td"><span class="td">司徒俊杰</span></li>
+					<li class="table-slide-td"><span class="td">2016.02.02 10:00:00</span></li>
+				</ul>
+			</li>
+			<li class="slide-li">
+				<ul>
+					<li class="table-slide-td"><span class="td">不太满意</span></li>
+					<li class="table-slide-td"><span class="td"></span></li>
+					<li class="table-slide-td"><span class="td"></span></li>
+					<li class="table-slide-td"><span class="td">答案四</span></li>
+					<li class="table-slide-td"><span class="td">答案四</span></li>
+					<li class="table-slide-td"><span class="td">答案四</span></li>
+					<li class="table-slide-td"><span class="td">答案四</span></li>
+					<li class="table-slide-td"><span class="td">答案四</span></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<script type="text/javascript">
+		slideTable($('#slideTable'));
+	</script>
+</div>
 </body>
 </html>

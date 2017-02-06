@@ -5,8 +5,6 @@
     author:UI
 */
 $(function() {
-    // 九宫格图片
-    setPicSize();
     // 响应式图片
     responsiveImg();
     // 默认左侧菜单
@@ -20,8 +18,8 @@ $(function() {
     bothDefaultTab('click');
     // 竖向多级选项卡
     verDefaultTab('click');
-    // 响应式表格
-    responsiveTable($('#responsive-table'),'100',1);
+    // 默认自定义单选
+    defineRadio();
 });
 /* 
     name:弹出窗口
@@ -72,12 +70,12 @@ function responsiveImg(){
     var tw=$(this).width();
     var th=$(this).height();
     if (tw/th>=pw/ph) {
-        var css={'height':'100%','width':'auto','marginTop':'auto'};
-        $(this).css(css);
+        var imgcss1={'height':'100%','width':'auto','marginTop':'auto'};
+        $(this).css(imgcss1);
         $(this).css('marginLeft',(parseInt($(this).parent().width()) - $(this).width())/2 + 'px');
      }else{
-        var css={'height':'auto','width':'100%','marginLeft':'auto'};
-        $(this).css(css);
+        var imgcss2={'height':'auto','width':'100%','marginLeft':'auto'};
+        $(this).css(imgcss2);
         $(this).css('marginTop',(parseInt($(this).parent().height()) - $(this).height())/2 + 'px');
     }
     });
@@ -117,7 +115,7 @@ function tipsPop(type,content,time,position){
     '</div>';
     $('body').append(innertxt.replace('{{type}}',type)
         .replace('{{content}}',content));
-    if (position=='center' || position==null || position=='') {
+    if (position=='center' || position===null || position==='') {
         setPositionCenter($('.tipsPop-wrap'));
     }else if(position=='top') {
         setPositionTop($('.tipsPop-wrap'));
@@ -148,8 +146,8 @@ function tipsPop(type,content,time,position){
     date:2016-12-28
     author:吴明姜
 */
-function setPicSize(){
-    var list=$("#sudoku > span");
+function setPicSize(obj){
+    var list=obj.children('span');
     for(var i=0;i<list.length;i++){
         if(list.length==1){
             list[i].style["width"]="100%";
@@ -159,10 +157,10 @@ function setPicSize(){
             list[i].style["width"]="32%";
         }
         list[i].style["height"]=3*list[i].offsetWidth/4+"px";
+
         var picObj=list[i].getElementsByTagName('img');
-        var img = new Image();
-        img.src = picObj[0].src;
-        if(img.width/img.height>=4/3){
+        // alert(picObj[0].width+'高度：'+picObj[0].height);
+        if(picObj[0].width/picObj[0].height>=4/3){
             picObj[0].style["height"]="100%";
             picObj[0].style["width"]="auto";
             picObj[0].style["marginTop"]='auto';
@@ -203,7 +201,7 @@ function defaultLeftNav(){
             $(this).parent().addClass('current');
         }
 
-        if ($(this).attr('url') && $(this).attr('url')!='') {
+        if ($(this).attr('url') && $(this).attr('url')!=='') {
             $(".frame-content").attr("src",$(this).attr('url'));
         }
         e.stopPropagation();
@@ -381,7 +379,7 @@ function verDefaultTab(event){
 */
 function responsiveTable(obj,minWidth,foldTd){
     var _table=obj;
-    var oth_html=new Array();
+    var oth_html=[];
     //保存tr值
     _table.find('th').each(function(i){
         oth_html[i]=$(this).html();
@@ -389,9 +387,9 @@ function responsiveTable(obj,minWidth,foldTd){
     // 保存td值
     var tr_length=_table.find('tr').length-1;
     var $td=_table.find('td');
-    var otd_html=new Array();
+    var otd_html=[];
     for(var i=0,k=0;i<tr_length;i++){//行
-        otd_html[i]=new Array(); 
+        otd_html[i]=[]; 
         for(var j=0;j<oth_html.length;j++){//列
             otd_html[i][j]= _table.find('td').eq(k).html();
             k++;
@@ -399,10 +397,6 @@ function responsiveTable(obj,minWidth,foldTd){
     }
     resizeTable(_table,oth_html,otd_html);
     function resizeTable(tableObj,ths,tds){
-        //窗口变动时隐藏选项
-        tableObj.find('.child').hide();
-        $('.fold').html('+');
-
         var otd_num=tableObj.find('tr').first().children('th').length;
         var ave_td_w=$(window).width()/otd_num;
         var tableTemp='';
@@ -422,13 +416,13 @@ function responsiveTable(obj,minWidth,foldTd){
         //拼接内容行
         for(var i=0;i<tr_length;i++){   //表格除首行行数
             // 原始行
-            for(var j=0;j<tds[i].length-snum;j++){
+            for(var q=0;q<tds[i].length-snum;q++){
                 // 添加展开标记
-                if((j+1)==foldTd && snum!==0){
-                    tdTemp=tdTemp+'<td>'+tds[i][j]+'<span class="fold" foldId="'+i+'">+</span>'+'</td>';
+                if((q+1)==foldTd && snum!==0){
+                    tdTemp=tdTemp+'<td>'+tds[i][q]+'<span class="fold" foldId="'+i+'">+</span>'+'</td>';
                 }else{
                     //拼接本行td
-                    tdTemp=tdTemp+'<td>'+tds[i][j]+'</td>';
+                    tdTemp=tdTemp+'<td>'+tds[i][q]+'</td>';
                 }
             }
             tableTemp=tableTemp+'<tr>'+tdTemp+'</tr>';
@@ -462,3 +456,144 @@ function responsiveTable(obj,minWidth,foldTd){
         timer=setTimeout(resizeTable(_table,oth_html,otd_html),300);
     });
 }
+/* 
+    name:滑屏表格-兼容IE8+
+    date:2017-01-17
+    argument：单元格最小宽度，每次自减个数，展开标志出现在第几列
+    author:吴明姜
+*/
+function slideTable(tableObj){
+    var pl=parseInt(tableObj.find('.table-slide-th').css('paddingLeft').replace('px','')) || 0;
+    var showLi=tableObj.find('.slide-li');
+    var showLiw=showLi.width();
+    var slideUl=showLi.find('ul');
+    var slideLi=slideUl.eq(0).find('li');
+    var slideLiw=slideLi.width();
+    var slideUlw=slideLi.length*slideLiw;
+
+    slideUl.css('width',slideUlw+'px');//设置滚动ul宽度,收缩表格与滑动表格共用时不兼容IE8，待调整；
+    if(slideUlw>showLiw){
+        // 左滑动
+        var slideGap = slideLiw;
+        $('#nextQuestion').bind('click',function() {
+            var endPoint = slideUlw - showLiw; //左滑动终点
+            var realLeft = slideUl.position().left-pl; //实际偏移量
+            if (-realLeft > endPoint || (endPoint + realLeft) <= slideGap) {
+                slideUl.animate({
+                    left: -endPoint + 'px'
+                }, 200);
+                $('#nextQuestion').addClass('enabled');
+            } else {
+                slideUl.animate({
+                    left: (slideUl.position().left - slideGap-pl) + 'px'
+                }, 200);
+                $('#nextQuestion').removeClass('enabled');
+            }
+            $('#prevQuestion').removeClass('enabled');
+        });
+        // 右滑动
+        $('#prevQuestion').bind('click',function() {
+            var endPoint = 0; //右滑动终点
+            var realLeft = slideUl.position().left-pl; //实际偏移量
+            if (-realLeft <= slideGap) {
+                slideUl.animate({
+                    left: -endPoint + 'px'
+                }, 200);
+                $('#prevQuestion').addClass('enabled');
+            } else {
+                slideUl.animate({
+                    left: (slideUl.position().left + slideGap-pl) + 'px'
+                }, 200);
+                $('#prevQuestion').removeClass('enabled');
+            }
+            $('#nextQuestion').removeClass('enabled');
+        });
+    }else{
+        $('#prevQuestion').addClass('enabled');
+        $('#nextQuestion').addClass('enabled');
+    }
+}
+/* 
+    name:自定义单选多选
+    date:2017-01-23
+    author:吴明姜
+*/
+function defineRadio(){
+    $('body').on('click','.define-radio',function(){
+        if(!$(this).hasClass('disabled')){
+            var radioName=$(this).attr('name');
+            $('.define-radio[name='+radioName+']').each(function(){
+                if(!$(this).hasClass('disabled')){
+                    $(this).removeClass('checked')
+                }
+            });
+            $(this).addClass('checked');
+        }
+    });
+    $('body').on('click','.define-cbox',function(){
+        if(!$(this).hasClass('disabled')){
+            if($(this).hasClass('checked')){
+                $(this).removeClass('checked');
+            }else{
+                $(this).addClass('checked');
+            }
+        }
+    });
+}
+/* 
+    name:获取单选、多选的值
+    date:2017-01-23
+    author:吴明姜
+*/
+function inputval(name){
+    var radioObj=$('.define-radio[name='+name+']');
+    var cboxObj_name=$('.define-cbox[name='+name+']').eq(0);
+    var cboxObj_id=$('.define-cbox[id='+name+']').eq(0);
+    var val='';
+    if (radioObj.length!==0){ 
+        radioObj.each(function(){
+            if ($(this).hasClass('checked')) {
+                val=$(this).html();
+            }
+        });
+    }else if (cboxObj_name.length!==0){
+        val=cboxObj_name.html();
+    }else if(cboxObj_id.length!==0){
+        val=cboxObj_id.html();
+    }
+    return val;
+}
+/* 
+    name:设置单选、多选的值
+    date:2017-01-23
+    author:吴明姜
+*/
+function inputset(id,name,value){
+    if (!value) {
+        value=name;
+    }
+    var radioObj=$('.define-radio[name='+id+']');
+    var cboxObj_id=$('.define-cbox[id='+id+']');
+    var cboxObj_name=$('.define-cbox[name='+id+']');
+    if (radioObj.length!==0) {
+        radioObj.removeClass('checked');
+        radioObj.each(function(){
+            if ($(this).html()==value) {
+                $(this).addClass('checked');
+            }
+        })
+    }else if(cboxObj_id.length!==0){
+        cboxObj_id.addClass('checked');
+    }else if(cboxObj_name.length!==0){
+        cboxObj_name.addClass('checked');
+    }else{
+        console.log("找不到指定元素！");
+    }
+}
+
+
+
+
+
+
+

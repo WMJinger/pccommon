@@ -39,7 +39,7 @@ body{
 
 //------ size style S---------
 @radius-size:2px;
-@txt-height:38px;
+@txt-height:32px;
 @txt-form-gap:14px;
 
 @font-base-largesize:18px;
@@ -131,10 +131,6 @@ body{
 	border: 1px solid desaturate(@main-color, 10%);
 	box-shadow: 0 0 10px lighten(desaturate(@main-color, 40%),30%) ;
 }
-.txt1{
-	width: 20%;
-	margin-bottom: @txt-form-gap;
-}
 .txt-error{
 	border:1px solid @warm-color;
 	box-shadow: 0 0 10px lighten(desaturate(@warm-color, 40%),30%) ;
@@ -187,6 +183,85 @@ body{
 	width: @txt-height;
 	line-height: @txt-height+10px;
 	text-align: center;
+}
+.txt-w60{
+	width:60px;
+}
+.txt-w120{
+	width:120px;
+}
+.txt-w180{
+	width:180px;
+}
+.txt-w240{
+	width:240px;
+}
+.txt-w300{
+	width:300px;
+}
+.txt-w360{
+	width:360px;
+}
+.txt-w420{
+	width:420px;
+}
+/* 
+	name:下拉框样式
+	date:2017-01-20
+	author:吴明姜
+*/
+.sect{
+	font-family: "Microsoft Yahei";
+	height:@txt-height;
+	border-radius: @radius-size;
+	border-color: @border-color;
+}
+.default-rbox{
+	line-height: @txt-height;
+}
+.default-rbox input{
+	vertical-align: middle;
+	margin-top: 0;
+	margin-bottom: 0;
+	margin-right: 4px;
+}
+/* 
+	name:自定义单选
+	date:2017-01-23
+	author:吴明姜
+*/
+.define-radio{
+	display:inline-block;
+	padding-left: 20px;
+	background: url("@{images}/rb01.png") 0 center no-repeat;
+}
+.define-radio.disabled{
+	background: url("@{images}/rb01-disable.png") 0 center no-repeat;
+}
+.define-radio.checked{
+	background: url("@{images}/rb02.png") 0 center no-repeat;
+}
+.define-radio.checked.disabled{
+	background: url("@{images}/rb02-disable.png") 0 center no-repeat;
+}
+/* 
+	name:自定义多选
+	date:2017-01-23
+	author:吴明姜
+*/
+.define-cbox{
+	display:inline-block;
+	padding-left: 20px;
+	background: url("@{images}/cb01.png") 0 center no-repeat;
+}
+.define-cbox.disabled{
+	background: url("@{images}/cb01-disable.png") 0 center no-repeat;
+}
+.define-cbox.checked{
+	background: url("@{images}/cb02.png") 0 center no-repeat;
+}
+.define-cbox.checked.disabled{
+	background: url("@{images}/cb02-disable.png") 0 center no-repeat;
 }
 /* 
 	name:操作提示弹窗样式
@@ -254,7 +329,7 @@ body{
 	date:2016-12-28
 	author:吴明姜
 */
-#sudoku span{
+.sudoku-wrap span{
 	display: inline-block;
 	overflow: hidden;
 	text-align: center;
@@ -275,23 +350,23 @@ body{
 .bicon{
 
 }
-.userico,.pswico,.mailico{
+.user-ico,.psw-ico,.mail-ico{
 	display:inline-block;
 	width:22px;
 	height:22px;
 	*margin-top: 24%;
 	vertical-align: middle;
 }
-.userico{
+.user-ico{
 	background: url("@{images}/icon.png") -52px 0 no-repeat;
 }
-.pswico{
+.psw-ico{
 	background: url("@{images}/icon.png") -26px 0 no-repeat;
 }
-.mailico{
+.mail-ico{
 	background: url("@{images}/icon.png") -74px 0 no-repeat;
 }
-.searchico{
+.search-ico{
 	background: url("@{images}/icon.png") -97px 0 no-repeat;
 }
 .hamburg-ico{
@@ -917,7 +992,7 @@ body{
 	date:2017-01-12
 	author:吴明姜
 */
-@hover-tips-bgcolor:lighten(@main-color,28%);
+@hover-tips-bgcolor:lighten(desaturate(@main-color,40%),40%);
 .hover-tips-left-wrap,
 .hover-tips-right-wrap,
 .hover-tips-top-wrap,
@@ -1303,6 +1378,7 @@ body{
 .table01{
 	width:100%;
 	*width:auto;
+	*table-layout: fixed;
 	border-collapse: collapse;
 	tr th{
 		font-weight: normal;
@@ -1321,6 +1397,11 @@ body{
 		word-wrap: break-word;
 	}
 }
+/* 
+	name:折叠表格样式
+	date:2017-01-18
+	author:吴明姜
+*/
 table{
 	.child{
 		display:none;
@@ -1333,6 +1414,7 @@ table{
 		width:16px;
 		height:16px;
 		line-height: 13px;
+		*line-height: 16px;
 		border-radius:50%;
 		background-color: @sub-color3;
 		border:2px solid #fff;
@@ -1342,11 +1424,560 @@ table{
 		.pop-shadow;
 		text-align: center;
 		vertical-align: middle;
+		*vertical-align: baseline;
 		cursor:pointer;
 	}
 }
+/* 
+	name:滑动表格
+	date:2017-01-18
+	author:吴明姜
+*/
+.table-slide{
+	@fix-width:300px;//左侧固定宽度
+	@th-height:auto;//首行高度
+	@td-height:auto;//内容行高度
+	@td-width:200px;//内容单元宽度
+    position:relative;
+    padding-right: 50px;
+	.prev-btn,
+	.next-btn{
+	    position:absolute;
+	    display:block;
+	    height:16px;
+	    width:16px;
+	    line-height: 16px;
+	    text-align: center;
+	    border-radius: 50%;
+	    color:#fff;
+	    background-color: @sub-color3;
+	    background-repeat: no-repeat;
+	}
+	.prev-btn.enabled,
+	.next-btn.enabled{
+		background-color: #ccc;
+	}
+	.prev-btn{
+	    top:20px;
+	    right:26px;
+	}
+	.next-btn{
+	    top:20px;
+	    right:0px;
+	}
+	.table-slide-th{
+	    color:@font-base-subcolor;
+	    height:@th-height;
+	}
+	.table-slide-tr{
+	    color:@font-base-color;
+	    height:@td-height;
+	}
+	.table-slide-th,
+	.table-slide-tr{
+	    position: relative;
+	    padding-left: @fix-width;
+	    border-bottom: 1px solid @border-color;
+	}
+	.fix-li li,
+	.slide-li li{
+	    float:left;
+	}
+	.fix-li{
+	    position:absolute;
+	    width:(@fix-width)-@txt-form-gap;
+	    left:0px;
+	    top:0;
+	}
+	.fix-li li{
+	    width:50%;
+	    text-align: left;
+	    color: @font-base-subcolor;
+	}
+	.slide-li{
+	    width: 100%;
+	    *position:relative;
+	    overflow: hidden;
+	    background-color: lighten(desaturate(@main-color,40%),30%);
+	}
+	.slide-li ul{
+	    position: relative;
+	}
+	.slide-li li{
+	    width: @td-width;
+	}
+	/*子单元格样式*/
+	.table-slide-td .td{
+	    display: inline-block;/*兼容IE*/
+	    line-height: normal;
+	    padding:4px;
+	    *padding:4px 0;
+	    width:100%;
+	    overflow:hidden;
+	    text-overflow:ellipsis;
+	    display:-webkit-box;
+	    -webkit-box-orient:vertical;
+	    -webkit-line-clamp:2; 
+	}
+	.fix-li li .td{
+		white-space: nowrap;
+		display: inline-block;
+	}
+}
+/* 
+  name:加载动画
+  date:2017-01-22
+  author:load from net
+*/
+@load-color:darken(desaturate(@main-color,20%),30%);
+.demo-1,
+.demo-2,
+.demo-3,
+.demo-4,
+.demo-5,
+.demo-6,
+.demo-7{
+	float:left;
+	width:20%;
+	height:100px;
+	position:relative;
+}
+.loading {
+  position: absolute;
+  top: 0px;
+  left:0;
+  bottom:0;
+  right:0;
+  margin:auto;
+}
+@-webkit-keyframes loading-1{
+  0%{
+    transform: rotate(0deg);
+  }
+  50%{
+    transform: rotate(180deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+}
+.demo-1 .loading{
+  width: 35px;
+  height: 35px;
+}
+.demo-1 .loading i{
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius:50%;
+  background: linear-gradient(transparent 0%, transparent 70%, @load-color 30% ,@load-color 100%);
+  -webkit-animation: loading-1 .6s linear 0s infinite;
+}
+@-webkit-keyframes loading-2{
+  0%{
+    transform: scaleY(1);
+  }
+  50%{
+    transform: scaleY(0.4);
+  }
+  100%{
+    transform: scaleY(1);
+  }
+}
+.demo-2 .loading{
+	width:60px;
+	height:40px;
+}
+.demo-2 .loading i{
+  display: inline-block;
+  width: 4px;
+  height: 35px;
+  border-radius: 2px;
+  margin:0 2px;
+  background-color: @load-color;
+}
+.demo-2 .loading i:nth-child(1){
+  -webkit-animation:loading-2 1s ease-in .1s infinite;
+}
+.demo-2 .loading i:nth-child(2){
+  -webkit-animation:loading-2 1s ease-in .2s infinite;
+}
+.demo-2 .loading i:nth-child(3){
+  -webkit-animation:loading-2 1s ease-in .3s infinite;
+}
+.demo-2 .loading i:nth-child(4){
+  -webkit-animation:loading-2 1s ease-in .4s infinite;
+}
+.demo-2 .loading i:nth-child(5){
+  -webkit-animation:loading-2 1s ease-in .5s infinite;
+}
+
+.demo-3 .loading{
+	width:2px;
+	height:2px;
+}
+.demo-3 .loading i{
+  display: block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: @load-color;
+  position: absolute;
+}
+
+.demo-3 .loading i:nth-child(1){
+  top: 25px;
+  left: 0;
+  -webkit-animation:loading-3 1s ease 0s infinite;
+}
+.demo-3 .loading i:nth-child(2){
+  top: 17px;
+  left: 17px;
+  -webkit-animation:loading-3 1s ease -0.12s infinite;
+}
+.demo-3 .loading i:nth-child(3){
+  top: 0px;
+  left: 25px;
+  -webkit-animation:loading-3 1s ease -0.24s infinite;
+}
+.demo-3 .loading i:nth-child(4){
+  top: -17px;
+  left: 17px;
+  -webkit-animation:loading-3 1s ease -0.36s infinite;
+}
+.demo-3 .loading i:nth-child(5){
+  top: -25px;
+  left: 0;
+  -webkit-animation:loading-3 1s ease -0.48s infinite;
+}
+.demo-3 .loading i:nth-child(6){
+  top: -17px;
+  left: -17px;
+  -webkit-animation:loading-3 1s ease -0.6s infinite;
+}
+.demo-3 .loading i:nth-child(7){
+  top: 0px;
+  left: -25px;
+  -webkit-animation:loading-3 1s ease -0.72s infinite;
+}
+.demo-3 .loading i:nth-child(8){
+  top: 17px;
+  left: -17px;
+  -webkit-animation:loading-3 1s ease -0.84s infinite;
+}
+
+@-webkit-keyframes loading-3{
+  50%{
+    transform: scale(0.4);
+    opacity: .3
+  }
+  100%{
+    transform: scale(1);
+    opacity: 1
+  }
+}
 
 
+@-webkit-keyframes loading-4{
+  0%{
+    transform: scale(0);
+    opacity: 0;
+  }
+  1%{
+    opacity: 1;
+  }
+  100%{
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+.demo-4 .loading i:nth-child(1){
+  -webkit-animation:loading-4 1s linear 0s infinite;
+}
+.demo-4 .loading i:nth-child(2){
+  -webkit-animation:loading-4 1s linear 0.2s infinite;
+}
+.demo-4 .loading i:nth-child(3){
+  -webkit-animation:loading-4 1s linear 0.4s infinite;
+}
+.demo-4 .loading{
+  width: 60px;
+  height: 60px;
+}
+.demo-4 .loading i{
+  display: block;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: @load-color;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.demo-5 .loading{
+  width: 40px;
+  height: 40px;
+}
+.demo-5 .loading i{
+  display: block;
+  border:2px solid #333;
+  border-color: transparent @load-color;
+  border-radius: 50%;
+  position: absolute;
+
+}
+.demo-5 .loading i:first-child{
+  width: 35px;
+  height: 35px;
+  top:0px;
+  left: 0px;
+  -webkit-animation:loading-5 1s ease-in-out 0s infinite;
+}
+.demo-5 .loading i:last-child{
+  width: 15px;
+  height: 15px;
+  top:10px;
+  left: 10px;
+  -webkit-animation:loading-5 1s ease-in-out 0.5s infinite reverse;
+}
+@-webkit-keyframes loading-5{
+  0%{
+    transform: rotate(0deg) scale(1);
+  }
+  50%{
+    transform: rotate(180deg) scale(0.6);
+  }
+  100%{
+    transform: rotate(360deg) scale(1);
+  }
+
+}
+
+.demo-6 .loading{
+  width: 80px;
+  height: 20px;
+}
+.demo-6 .loading i{
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: @load-color;
+  margin-right: 10px;
+  position: absolute;
+}
+@-webkit-keyframes loading-6{
+  0%{
+    left: 100px;
+    top: 0;
+  }
+  80%{
+    left: 0;
+    top: 0;
+  }
+  85%{
+    left: 0;
+    top: -20px;
+    width: 20px;
+    height: 20px;
+  }
+  90%{
+    width: 40px;
+    height: 20px;
+  }
+  95%{
+    left: 100px;
+    top: -20px;
+    width: 20px;
+    height: 20px;
+  }
+  100%{
+    left: 100px;
+    top: 0;
+  }
+
+}
+
+.demo-6 .loading i:nth-child(1){
+  -webkit-animation:loading-6 2s linear 0s infinite;
+}
+.demo-6 .loading i:nth-child(2){
+  -webkit-animation:loading-6 2s linear -0.4s infinite;
+}
+.demo-6 .loading i:nth-child(3){
+  -webkit-animation:loading-6 2s linear -0.8s infinite;
+}
+.demo-6 .loading i:nth-child(4){
+  -webkit-animation:loading-6 2s linear -1.2s infinite;
+}
+.demo-6 .loading i:nth-child(5){
+  -webkit-animation:loading-6 2s linear -1.6s infinite;
+}
+.demo-7 .loading{
+	width:2px;
+	height:2px;
+}
+.demo-7 .loading i {
+  background-color: @load-color;
+  border-radius: 2px;
+  margin: 2px;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  position: absolute;
+  width: 5px;
+  height: 15px;
+}
+.demo-7 .loading-1 {
+  top: 20px;
+  left: 0;
+  -webkit-animation: loading 1.2s 0.12s infinite ease-in-out;
+  -moz-animation: loading 1.2s 0.12s infinite ease-in-out;
+  -ms-animation: loading 1.2s 0.12s infinite ease-in-out;
+  -o-animation: loading 1.2s 0.12s infinite ease-in-out;
+  animation: loading 1.2s 0.12s infinite ease-in-out;
+}
+
+.demo-7 .loading-2 {
+  top: 13.63636px;
+  left: 13.63636px;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  -webkit-animation: loading 1.2s 0.24s infinite ease-in-out;
+  -moz-animation: loading 1.2s 0.24s infinite ease-in-out;
+  -ms-animation: loading 1.2s 0.24s infinite ease-in-out;
+  -o-animation: loading 1.2s 0.24s infinite ease-in-out;
+  animation: loading 1.2s 0.24s infinite ease-in-out;
+}
+
+.demo-7 .loading-3 {
+  top: 0;
+  left: 20px;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+  -webkit-animation: loading 1.2s 0.36s infinite ease-in-out;
+  -moz-animation: loading 1.2s 0.36s infinite ease-in-out;
+  -ms-animation: loading 1.2s 0.36s infinite ease-in-out;
+  -o-animation: loading 1.2s 0.36s infinite ease-in-out;
+  animation: loading 1.2s 0.36s infinite ease-in-out;
+}
+
+.demo-7 .loading-4 {
+  top: -13.63636px;
+  left: 13.63636px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  -webkit-animation: loading 1.2s 0.48s infinite ease-in-out;
+  -moz-animation: loading 1.2s 0.48s infinite ease-in-out;
+  -ms-animation: loading 1.2s 0.48s infinite ease-in-out;
+  -o-animation: loading 1.2s 0.48s infinite ease-in-out;
+  animation: loading 1.2s 0.48s infinite ease-in-out;
+}
+
+.demo-7 .loading-5 {
+  top: -20px;
+  left: 0;
+  -webkit-animation: loading 1.2s 0.6s infinite ease-in-out;
+  -moz-animation: loading 1.2s 0.6s infinite ease-in-out;
+  -ms-animation: loading 1.2s 0.6s infinite ease-in-out;
+  -o-animation: loading 1.2s 0.6s infinite ease-in-out;
+  animation: loading 1.2s 0.6s infinite ease-in-out;
+}
+
+.demo-7 .loading-6 {
+  top: -13.63636px;
+  left: -13.63636px;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  -webkit-animation: loading 1.2s 0.72s infinite ease-in-out;
+  -moz-animation: loading 1.2s 0.72s infinite ease-in-out;
+  -ms-animation: loading 1.2s 0.72s infinite ease-in-out;
+  -o-animation: loading 1.2s 0.72s infinite ease-in-out;
+  animation: loading 1.2s 0.72s infinite ease-in-out;
+}
+
+.demo-7 .loading-7 {
+  top: 0;
+  left: -20px;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+  -webkit-animation: loading 1.2s 0.84s infinite ease-in-out;
+  -moz-animation: loading 1.2s 0.84s infinite ease-in-out;
+  -ms-animation: loading 1.2s 0.84s infinite ease-in-out;
+  -o-animation: loading 1.2s 0.84s infinite ease-in-out;
+  animation: loading 1.2s 0.84s infinite ease-in-out;
+}
+
+.demo-7 .loading-8 {
+  top: 13.63636px;
+  left: -13.63636px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  -webkit-animation: loading 1.2s 0.96s infinite ease-in-out;
+  -moz-animation: loading 1.2s 0.96s infinite ease-in-out;
+  -ms-animation: loading 1.2s 0.96s infinite ease-in-out;
+  -o-animation: loading 1.2s 0.96s infinite ease-in-out;
+  animation: loading 1.2s 0.96s infinite ease-in-out;
+}
+@-webkit-keyframes loading {
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-moz-keyframes loading {
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-ms-keyframes loading {
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-o-keyframes loading {
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes loading {
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+} 
 
 
 
