@@ -63,21 +63,23 @@ function popWindow(winobj,width,height){
     author:吴明姜
 */
 function responsiveImg(){
-    $('.responsive-img').each(function(){
-    $(this).parent().css('overflow','hidden');
-    var pw=$(this).parent().width();
-    var ph=$(this).parent().height();
-    var tw=$(this).width();
-    var th=$(this).height();
-    if (tw/th>=pw/ph) {
-        var imgcss1={'height':'100%','width':'auto','marginTop':'auto'};
-        $(this).css(imgcss1);
-        $(this).css('marginLeft',(parseInt($(this).parent().width()) - $(this).width())/2 + 'px');
-     }else{
-        var imgcss2={'height':'auto','width':'100%','marginLeft':'auto'};
-        $(this).css(imgcss2);
-        $(this).css('marginTop',(parseInt($(this).parent().height()) - $(this).height())/2 + 'px');
-    }
+    isLoadImg($('.responsive-img'),function(){
+        $('.responsive-img').each(function(){
+            $(this).parent().css('overflow','hidden');
+            var pw=$(this).parent().width();
+            var ph=$(this).parent().height();
+            var tw=$(this).width();
+            var th=$(this).height();
+            if (tw/th>=pw/ph) {
+                var imgcss1={'height':'100%','width':'auto','marginTop':'auto'};
+                $(this).css(imgcss1);
+                $(this).css('marginLeft',(parseInt($(this).parent().width()) - $(this).width())/2 + 'px');
+            }else{
+                var imgcss2={'height':'auto','width':'100%','marginLeft':'auto'};
+                $(this).css(imgcss2);
+                $(this).css('marginTop',(parseInt($(this).parent().height()) - $(this).height())/2 + 'px');
+            }
+        });
     });
     resizefun(responsiveImg);
 }
@@ -143,6 +145,7 @@ function tipsPop(type,content,time,position){
 }
 /* 
     name:九宫格图片 图片自适应4:3比例 S
+    parameter：九宫格集合
     date:2016-12-28
     author:吴明姜
 */
@@ -157,20 +160,57 @@ function setPicSize(obj){
             list[i].style["width"]="32%";
         }
         list[i].style["height"]=3*list[i].offsetWidth/4+"px";
-
-        var picObj=list[i].getElementsByTagName('img');
-        // alert(picObj[0].width+'高度：'+picObj[0].height);
-        if(picObj[0].width/picObj[0].height>=4/3){
-            picObj[0].style["height"]="100%";
-            picObj[0].style["width"]="auto";
-            picObj[0].style["marginTop"]='auto';
-            picObj[0].style["marginLeft"]=(parseInt(list[i].offsetWidth) - picObj[0].width)/2 + 'px';
-        }else{
-            picObj[0].style["width"]="100%";
-            picObj[0].style["height"]="auto";
-            picObj[0].style["marginLeft"]='auto';
-            picObj[0].style["marginTop"]=(parseInt(list[i].style.height) - picObj[0].height)/2 + 'px';
+    }
+    var picObj=obj.find('img');
+    isLoadImg(picObj,function(){
+        picObj.each(function(){
+            if($(this).width()/$(this).height()>=4/3){
+                var imgcss1={
+                    "height":"100%",
+                    "width":"auto",
+                    "marginTop":"auto"
+                }
+                $(this).css(imgcss1);
+                $(this).css("marginLeft",($(this).parent().width() - $(this).width())/2 + 'px');
+            }else{
+                var imgcss2={
+                    "width":"100%",
+                    "height":"auto",
+                    "marginLeft":"auto"
+                }
+                $(this).css(imgcss2);
+                $(this).css("marginTop",($(this).parent().height() - $(this).height())/2 + 'px');
+            }
+        });
+    });
+}
+/* 
+    name:判断指定图片是否已经加载
+    parameter：图片集合，加载完成后的回调函数
+    date:2017-02-07
+    author:吴明姜
+*/
+function isLoadImg(imgobj,callback){
+    var t_img; // 定时器
+    var isLoad = true; // 控制变量
+    imgobj.each(function(){
+        // 找到为0就将isLoad设为false，并退出each
+        if($(this).height()=== 0){
+            isLoad = false;
+            return false;
         }
+    });
+    // 加载完毕
+    if(isLoad){
+        clearTimeout(t_img); // 清除定时器
+        // 回调函数
+        callback();
+        // 为false，因为找到了没有加载完成的图，将调用定时器递归
+    }else{
+        isLoad = true;
+        t_img = setTimeout(function(){
+            isLoadImg(imgobj,callback); // 递归扫描
+        },100); // 设置300毫秒就扫描一次，可调整
     }
 }
 /* 
