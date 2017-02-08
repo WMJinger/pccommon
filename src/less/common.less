@@ -24,7 +24,7 @@ body{
 // border-color
 @border-color:#e4e4e4;
 // main color
-@main-color:#69a1b2;
+@main-color:#60bafa;
 // complementary colors
 @sub-color1:#685199;
 @sub-color2:#587a2f;
@@ -73,16 +73,20 @@ body{
 /* 
 	name:按钮样式
 	date:2016-12-28
-	author:吴明姜
+	author:wumj
 */
 .btn{
 	display: inline-block;
 	font-size: 14px;
-	padding: 6px 20px;
+	height:@txt-height;
+	line-height: @txt-height;
+	padding: 0px 20px;
+	border-width: 1px;
 	border-radius: @radius-size;
 }
 .btn1{
 	background-color: @main-color;
+	border:1px solid @main-color;
 	color: #fff;
 }
 .btn1:hover{
@@ -90,10 +94,11 @@ body{
 }
 .btn2{
 	background-color: #fff;
-	border: 1px solid @main-color;
+	border: 1px solid darken(@border-color,10%);
 	color: @font-base-subcolor;
 }
 .btn2:hover{
+	border: 1px solid @main-color;
 	color: @main-color;
 }
 .btn3{
@@ -113,23 +118,30 @@ body{
 /* 
 	name:文本框样式
 	date:2016-12-28
-	author:吴明姜
+	author:wumj
 */
-.txt{
+.txt,
+.tarea{
 	border:1px solid @border-color;
 	border-radius: @radius-size;
 	padding-left: 4px;
 	color: @font-base-subcolor;
-	height: @txt-height;
-	line-height: @txt-height;
 	outline: none;
 	background-color: #fff;
 	font-family: @font-base-family;
 	box-sizing: border-box;
 }
-.txt1:active,.txt1:focus{
+.txt{
+	height: @txt-height;
+	line-height: @txt-height;
+	transition:all 0.3s;
+}
+.tarea{
+	resize:none;
+}
+.txt:active,.txt:focus{
 	border: 1px solid desaturate(@main-color, 10%);
-	box-shadow: 0 0 10px lighten(desaturate(@main-color, 40%),30%) ;
+	box-shadow: 0 0 10px lighten(desaturate(@main-color, 30%),20%) ;
 }
 .txt-error{
 	border:1px solid @warm-color;
@@ -206,9 +218,45 @@ body{
 	width:420px;
 }
 /* 
+	name:上传按钮
+	date:2017-02-07
+	author:wumj
+*/
+.default-ifile{
+	height:@txt-height;
+}
+.define-ifile-wrap{
+	display:inline-block;
+	.define-ifile{
+		position:relative;
+		display:inline-block;
+		margin-left: @txt-form-gap;
+		height:@txt-height;
+		line-height: @txt-height;
+		padding:0 14px;
+		text-align: center;
+		color:#fff;
+		background-color: @main-color;
+		border:1px solid @main-color;
+		border-radius: @radius-size;
+	}
+	.define-ifile input{
+		position:absolute;
+		top:0;
+		left:0;
+		width:100%;
+		height:100%;
+		z-index: 2;
+		opacity:0;
+		filter:alpha(opacity=0);
+		cursor:pointer;
+	}
+}
+input[type="file"]::-webkit-file-upload-button{cursor:pointer;}
+/* 
 	name:下拉框样式
 	date:2017-01-20
-	author:吴明姜
+	author:wumj
 */
 .sect{
 	font-family: "Microsoft Yahei";
@@ -228,7 +276,7 @@ body{
 /* 
 	name:自定义单选
 	date:2017-01-23
-	author:吴明姜
+	author:wumj
 */
 .define-radio{
 	display:inline-block;
@@ -247,7 +295,7 @@ body{
 /* 
 	name:自定义多选
 	date:2017-01-23
-	author:吴明姜
+	author:wumj
 */
 .define-cbox{
 	display:inline-block;
@@ -266,7 +314,7 @@ body{
 /* 
 	name:操作提示弹窗样式
 	date:2016-12-28
-	author:吴明姜
+	author:wumj
 */
 .tipsPop-wrap{
 	position: fixed;
@@ -327,7 +375,7 @@ body{
 /* 
 	name:自适应图片样式
 	date:2016-12-28
-	author:吴明姜
+	author:wumj
 */
 .sudoku-wrap span{
 	display: inline-block;
@@ -338,7 +386,7 @@ body{
 /* 
 	name:图标样式
 	date:2016-12-28
-	author:吴明姜
+	author:wumj
 */
 .sicon{
 	display: inline-block;
@@ -390,7 +438,7 @@ body{
 /* 
 	name:列布局样式
 	date:2016-12-28
-	author:吴明姜
+	author:wumj
 */
 .col-1,
 .col-2,
@@ -524,7 +572,7 @@ body{
 /* 
 	name:缩略图1样式
 	date:2016-12-28
-	author:吴明姜
+	author:wumj
 */
 .thumbnail{
 	position:relative;
@@ -638,7 +686,7 @@ body{
 /* 
 	name:链接移入效果1
 	date:2016-12-28
-	author:吴明姜
+	author:wumj
 */
 .animLink{
 	position:relative;
@@ -671,7 +719,7 @@ body{
 	name:黑色滚动条
 	date:2017-01-04
 	note:仅支持谷歌
-	author:吴明姜
+	author:wumj
 */
 .black-scroll::-webkit-scrollbar {
 	width: 7px;
@@ -702,7 +750,7 @@ body{
 	name:浅色滚动条
 	date:2017-01-16
 	note:仅支持谷歌
-	author:吴明姜
+	author:wumj
 */
 .ligth-scroll::-webkit-scrollbar {
 	width: 7px;
@@ -733,7 +781,7 @@ body{
 /* 
 	name:上下三角形图标
 	date:2017-01-04
-	author:吴明姜
+	author:wumj
 */
 .triangle-up {
 	display:inline-block;
@@ -769,84 +817,92 @@ body{
 /* 
 	name:默认框架布局1
 	date:2017-01-04
-	author:吴明姜
+	author:wumj
 */
 .main-content{
 	height:100%;
 }
 .default-head-content{
+	@default-height:40px;//头部高度
 	position:fixed;
-	height:40px;
+	height:@default-height;
 	width:100%;
 	box-sizing: border-box;
 	border-bottom: 1px solid @border-color;
 	background-color: #fff;
 	.frame-shadow;
 	z-index: 2;
-}
-.head-logo{
-	float:left;
-	width:140px;
-	height:36px;
-	line-height: 36px;
-	font-size: 24px;
-	font-weight: block;
-	color:@main-color;
-	margin-top: 2px;
-	margin-left: @txt-form-gap;
-}
-.head-nav{
-	float:left;
-	line-height: 40px;
-	height:100%;
-}
-.head-nav li{
-	float:left;
-	color:@font-base-subcolor;
-	font-size: 14px;
-	margin-left: @txt-form-gap;
-}
-.head-user{
-	float:right;
-	margin-top: 10px;
-}
-.head-user li{
-	position:relative;
-	float:right;
-	padding:0 @txt-form-gap;
-}
-.dropt-user .triangle-down{
-	display:inline-block;
-	margin-left: 6px;
-}
-.dropt-user a{
-	color:@font-base-color;
-}
-.dropt-user ul{
-	display:none;
-	position:absolute;
-	width:120px;
-	top:30px;
-	right:0;
-	background-color: #fff;
-	.frame-shadow;
-}
-.dropt-user:hover ul{
-	display:block;
-}
-.dropt-user ul li{
-	float:none;
-	margin-top: 4px;
-	padding:4px @txt-form-gap;
-	cursor:pointer;
-	transition:backgroundColor 0.2s;
-	-webkit-transition:backgroundColor 0.2s;
-}
-.dropt-user ul li:hover,
-.dropt-user ul li:hover a,
-.dropt-user ul li a:hover{
-	color:#fff;
-	background-color: darken(@main-color, 10%);
+	.head-logo{
+		float:left;
+		width:140px;
+		height:@default-height;
+		line-height: @default-height;
+		font-size: 24px;
+		font-weight: block;
+		color:@main-color;
+		margin-left: @txt-form-gap;
+	}
+	.head-nav{
+		float:left;
+		line-height: @default-height;
+		height:100%;
+	}
+	.head-nav li{
+		float:left;
+		color:@font-base-subcolor;
+		font-size: 14px;
+		margin-left: @txt-form-gap;
+	}
+	.head-user{
+		position:relative;
+		float:right;
+		height:100%;
+		z-index: 2;
+	}
+	.head-user{
+		height:100%;
+	}
+	.head-user li{
+		position:relative;
+		float:right;
+		line-height: @default-height;
+		padding:0 @txt-form-gap;
+	}
+	.dropt-user .triangle-down{
+		display:inline-block;
+		margin-left: 6px;
+	}
+	.dropt-user a{
+		color:@font-base-color;
+	}
+	.dropt-user ul{
+		display:none;
+		position:absolute;
+		width:120px;
+		top:@default-height;
+		right:0;
+		background-color: #fff;
+		border:1px solid @border-color;
+		.frame-shadow;
+	}
+	.dropt-user:hover ul{
+		display:block;
+	}
+	.dropt-user ul li{
+		float:none;
+		margin-top: 4px;
+		padding:4px @txt-form-gap;
+		line-height: normal;
+		cursor:pointer;
+		transition:backgroundColor 0.2s;
+		-webkit-transition:backgroundColor 0.2s;
+	}
+	.dropt-user ul li:hover,
+	.dropt-user ul li:hover a,
+	.dropt-user ul li a:hover{
+		color:#fff;
+		background-color: darken(@main-color, 10%);
+	}
 }
 .default-slide-nav-wrap{
 	position:absolute;
@@ -939,7 +995,7 @@ body{
 /* 
 	name:内容弹窗样式
 	date:2017-01-11
-	author:吴明姜
+	author:wumj
 */
 .shade{
 	position: fixed;
@@ -990,7 +1046,7 @@ body{
 /* 
 	name:移入提示
 	date:2017-01-12
-	author:吴明姜
+	author:wumj
 */
 @hover-tips-bgcolor:lighten(desaturate(@main-color,40%),40%);
 .hover-tips-left-wrap,
@@ -1080,7 +1136,7 @@ body{
 /* 
 	name:横向选项卡
 	date:2017-01-12
-	author:吴明姜
+	author:wumj
 */
 .hor-default-wrap{
 	position:relative;
@@ -1119,7 +1175,7 @@ body{
 /* 
 	name:横向选项卡-超出滚动
 	date:2017-01-13
-	author:吴明姜
+	author:wumj
 */
 .hor-scroll-tab-wrap{
 	position:relative;
@@ -1216,7 +1272,7 @@ body{
 /* 
 	name:双向选项卡
 	date:2017-01-12
-	author:吴明姜
+	author:wumj
 */
 .both-tab-wrap{
 	@left-tab-width:160px;
@@ -1304,7 +1360,7 @@ body{
 /* 
 	name:纵向选项卡
 	date:2017-01-16
-	author:吴明姜
+	author:wumj
 */
 .ver-tab-wrap{
 	@left-menu-width:160px;
@@ -1361,7 +1417,7 @@ body{
 /* 
 	name:表头固定
 	date:2017-01-16
-	author:吴明姜
+	author:wumj
 */
 .fix-head-table{
 	@tbody-height:120px;
@@ -1373,7 +1429,7 @@ body{
 /* 
 	name:表格样式1
 	date:2017-01-16
-	author:吴明姜
+	author:wumj
 */
 .table01{
 	width:100%;
@@ -1400,7 +1456,7 @@ body{
 /* 
 	name:折叠表格样式
 	date:2017-01-18
-	author:吴明姜
+	author:wumj
 */
 table{
 	.child{
@@ -1431,7 +1487,7 @@ table{
 /* 
 	name:滑动表格
 	date:2017-01-18
-	author:吴明姜
+	author:wumj
 */
 .table-slide{
 	@fix-width:300px;//左侧固定宽度

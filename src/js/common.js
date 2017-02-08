@@ -24,7 +24,7 @@ $(function() {
 /* 
     name:弹出窗口
     date:2016-12-28
-    author:吴明姜
+    author:wumj
 */
 function popWindow(winobj,width,height){
     $('body').append('<div class="shade"></div>');
@@ -60,7 +60,7 @@ function popWindow(winobj,width,height){
 /* 
     name:响应式图片
     date:2016-12-28
-    author:吴明姜
+    author:wumj
 */
 function responsiveImg(){
     isLoadImg($('.responsive-img'),function(){
@@ -86,7 +86,7 @@ function responsiveImg(){
 /* 
     name:设置居中位置
     date:2016-12-28
-    author:吴明姜
+    author:wumj
 */
 function setPositionCenter(pop) {
     var pcss={'top':'','left':''};
@@ -97,7 +97,7 @@ function setPositionCenter(pop) {
 /* 
     name:设置居上位置
     date:2017-01-11
-    author:吴明姜
+    author:wumj
 */
 function setPositionTop(pop) {
     var pcss={'top':'','left':''};
@@ -108,7 +108,7 @@ function setPositionTop(pop) {
 /* 
     name:操作提示弹窗
     date:2016-12-28
-    author:吴明姜
+    author:wumj
 */
 function tipsPop(type,content,time,position){
     var innertxt='<div class="tipsPop-wrap">'+
@@ -147,7 +147,7 @@ function tipsPop(type,content,time,position){
     name:九宫格图片 图片自适应4:3比例 S
     parameter：九宫格集合
     date:2016-12-28
-    author:吴明姜
+    author:wumj
 */
 function setPicSize(obj){
     var list=obj.children('span');
@@ -188,7 +188,7 @@ function setPicSize(obj){
     name:判断指定图片是否已经加载
     parameter：图片集合，加载完成后的回调函数
     date:2017-02-07
-    author:吴明姜
+    author:wumj
 */
 function isLoadImg(imgobj,callback){
     var t_img; // 定时器
@@ -216,7 +216,7 @@ function isLoadImg(imgobj,callback){
 /* 
     name:默认左侧菜单,可设置无限级，兼容IE7+
     date:2017-01-07
-    author:吴明姜
+    author:wumj
 */
 function defaultLeftNav(){
     // 展开收缩事件
@@ -265,7 +265,7 @@ function defaultLeftNav(){
 /* 
     name:设置左菜单宽高
     date:2017-01-09
-    author:吴明姜
+    author:wumj
 */
 function setLeftNavSize(){
     // 设置导航高度
@@ -277,13 +277,13 @@ function setLeftNavSize(){
 /* 
     name:iframe右框架
     date:2017-01-07
-    author:吴明姜
+    author:wumj
 */
 function setframeContentSize(){
     // 设置右框架高度
     var fcss={
-        'height':$(window).height()-$('.default-head-content').height()-1+'px',
-        'width':$(window).width()-$('.default-slide-nav-wrap').width()+'px'
+        'height':winSize().winHeight-$('.default-head-content').height()-1+'px',
+        'width':winSize().winWidth-$('.default-slide-nav-wrap').width()+'px'
     }
     $('.default-right-content').css(fcss);
     resizefun(setframeContentSize);
@@ -291,7 +291,7 @@ function setframeContentSize(){
 /* 
     name:窗口resize函数，设置定时器减轻负荷
     date:2017-01-07
-    author:吴明姜
+    author:wumj
 */
 function resizefun(fun){
     var timer=0;
@@ -304,10 +304,37 @@ function resizefun(fun){
         timer=setTimeout(fun,300);
     });
 }
+function winSize(){
+    var wsize={
+        'winWidth':0,
+        'winHeight':0,
+    }
+    // 获取窗口宽度
+    if (window.innerWidth){
+        wsize.winWidth = window.innerWidth;
+    }
+    else if ((document.body) && (document.body.clientWidth)){
+        wsize.winWidth = document.body.clientWidth;
+    }
+    // 获取窗口高度
+    if (window.innerHeight){
+        wsize.winHeight = window.innerHeight;
+    }
+    else if ((document.body) && (document.body.clientHeight)){
+        wsize.winHeight = document.body.clientHeight;
+    }
+    // 通过深入 Document 内部对 body 进行检测，获取窗口大小
+    if (document.documentElement && document.documentElement.clientHeight && document.documentElement.clientWidth)
+    {
+        wsize.winHeight = document.documentElement.clientHeight;
+        wsize.winWidth = document.documentElement.clientWidth;
+    }
+    return wsize;
+}
 /* 
     name:横向简单选项卡-超出滚动
     date:2017-01-13
-    author:吴明姜
+    author:wumj
 */
 function horScrollTab(obj,event){
     var scrollTabWrap=obj.find('.scroll-tab-wrap');
@@ -360,7 +387,7 @@ function horScrollTab(obj,event){
 /* 
     name:横向简单选项卡
     date:2017-01-16
-    author:吴明姜
+    author:wumj
 */
 function defaultTab(event){
     $('.hor-default-wrap').on(event, '.hor-tab-li', function() {
@@ -374,7 +401,7 @@ function defaultTab(event){
 /* 
     name:双向选项卡
     date:2017-01-16
-    author:吴明姜
+    author:wumj
 */
 function bothDefaultTab(event){
     $('.left-tab-menu-li').bind(event,function(e){
@@ -395,7 +422,7 @@ function bothDefaultTab(event){
 /* 
     name:竖向多级选项卡
     date:2017-01-16
-    author:吴明姜
+    author:wumj
 */
 function verDefaultTab(event){
     $('.ver-tab-menu li').bind(event,function(e){
@@ -415,7 +442,7 @@ function verDefaultTab(event){
     name:响应式表格改写,减少重绘次数
     date:2017-01-17
     argument：单元格最小宽度，每次自减个数，展开标志出现在第几列
-    author:吴明姜
+    author:wumj
 */
 function responsiveTable(obj,minWidth,foldTd){
     var _table=obj;
@@ -500,7 +527,7 @@ function responsiveTable(obj,minWidth,foldTd){
     name:滑屏表格-兼容IE8+
     date:2017-01-17
     argument：单元格最小宽度，每次自减个数，展开标志出现在第几列
-    author:吴明姜
+    author:wumj
 */
 function slideTable(tableObj){
     var pl=parseInt(tableObj.find('.table-slide-th').css('paddingLeft').replace('px','')) || 0;
@@ -556,7 +583,7 @@ function slideTable(tableObj){
 /* 
     name:自定义单选多选
     date:2017-01-23
-    author:吴明姜
+    author:wumj
 */
 function defineRadio(){
     $('body').on('click','.define-radio',function(){
@@ -583,7 +610,7 @@ function defineRadio(){
 /* 
     name:获取单选、多选的值
     date:2017-01-23
-    author:吴明姜
+    author:wumj
 */
 function inputval(name){
     var radioObj=$('.define-radio[name='+name+']');
@@ -600,13 +627,15 @@ function inputval(name){
         val=cboxObj_name.html();
     }else if(cboxObj_id.length!==0){
         val=cboxObj_id.html();
+    }else{
+        throw new Error("找不到指定元素！");
     }
     return val;
 }
 /* 
     name:设置单选、多选的值
     date:2017-01-23
-    author:吴明姜
+    author:wumj
 */
 function inputset(id,name,value){
     if (!value) {
@@ -627,7 +656,7 @@ function inputset(id,name,value){
     }else if(cboxObj_name.length!==0){
         cboxObj_name.addClass('checked');
     }else{
-        console.log("找不到指定元素！");
+        throw new Error("找不到指定元素！");
     }
 }
 

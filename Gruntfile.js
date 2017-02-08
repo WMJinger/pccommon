@@ -1,7 +1,7 @@
 /* 
 	name:grunt函数
 	date:2016-12-28
-	author:吴明姜
+	author:wumj
 */
 module.exports=function(grunt){
 	//任务配置，所有插件的配置信息
