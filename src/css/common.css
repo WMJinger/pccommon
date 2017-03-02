@@ -101,6 +101,25 @@ body ::-webkit-scrollbar-track {
   opacity: 0;
   filter: alpha(opacity=0);
 }
+/*
+    name:字体图标库,注释的为本地地址
+    date:2017-03-02
+    author:wumj
+*/
+@font-face {
+  font-family: 'iconfont';
+  /* project id 243389 */
+  src: url('http://at.alicdn.com/t/font_i59kajstd5597ldi.eot');
+  src: url('http://at.alicdn.com/t/font_i59kajstd5597ldi.eot?#iefix') format('embedded-opentype'), url('http://at.alicdn.com/t/font_i59kajstd5597ldi.woff') format('woff'), url('http://at.alicdn.com/t/font_i59kajstd5597ldi.ttf') format('truetype'), url('http://at.alicdn.com/t/font_i59kajstd5597ldi.svg#iconfont') format('svg');
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
 /* 
 	name:按钮样式
 	date:2016-12-28
@@ -993,14 +1012,15 @@ input[type="file"]::-webkit-file-upload-button {
   float: right;
   width: 26px;
   height: 26px;
+  line-height: 26px;
+  text-align: center;
   border-radius: 2px;
   margin-top: 14px;
   margin-right: 14px;
   background-color: #078ded;
 }
-.slide-nav-btn .hamburg-ico {
-  display: block;
-  margin: 4px auto;
+.slide-nav-btn .iconfont {
+  color: #91cffc;
 }
 .default-slide-nav {
   *position: relative;
@@ -1021,8 +1041,10 @@ input[type="file"]::-webkit-file-upload-button {
 }
 .default-slide-nav .first-nav-li div i {
   position: absolute;
-  top: 7px;
+  top: 0;
   left: 14px;
+  font-size: 18px;
+  color: #91cffc;
 }
 .nav-li-text {
   display: block;
