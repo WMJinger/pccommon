@@ -15,6 +15,7 @@ body{
 	padding:0;
 	color:#333333;
 	background-color: #ffffff;
+	.ligth-scroll;
 }
 @font-base-family:"微软雅黑";
 //------ color style S---------
@@ -384,6 +385,48 @@ input[type="file"]::-webkit-file-upload-button{cursor:pointer;}
 	background-color: #e4e4e4;
 }
 /* 
+	name:放大图片样式
+	date:2016-03-02
+	author:wumj
+*/
+.zoompic-wrap{ 
+	position: relative;
+	@smallpicW:300px;//小图宽度
+	@smallpicH:200px;//小图高度
+	@bigpicW:300px;//大图宽度
+	@bigpicH:200px;//大图高度
+	.small-pic{
+		width:@smallpicW;
+		height:@smallpicH;
+		border: 1px solid @border-color;
+		overflow: hidden;
+	}
+	.big-pic{
+		display: none;
+		border: 1px solid @border-color;
+		overflow: hidden;
+		width: @bigpicW;
+		height: @bigpicH;
+		position: absolute;
+		left: @smallpicW+@txt-form-gap;
+		top: 0px;
+		img{
+			position: absolute;
+			top:0;
+			left:0;
+		}
+	}
+	.target{
+		width: 50px;
+		height: 50px;
+		background: #000;
+		opacity: 0.4;
+		filter:alpha(opacity=40);
+		position: absolute;
+		display: none; /*默认隐藏*/
+	}
+}
+/* 
 	name:图标样式
 	date:2016-12-28
 	author:wumj
@@ -721,22 +764,6 @@ input[type="file"]::-webkit-file-upload-button{cursor:pointer;}
 	note:仅支持谷歌
 	author:wumj
 */
-.black-scroll::-webkit-scrollbar {
-	width: 7px;
-}
-.black-scroll::-webkit-scrollbar-thumb {
-	background-color: darken(@main-color,54%);
-	background-clip: padding-box;
-	min-height: 28px;
-	padding: 100px 0;
-	box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1);
-	border-radius: 10px;
-}
-.black-scroll::-webkit-scrollbar-track {
-	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
-	-webkit-border-radius: 10px;
-	border-radius: 10px;
-}
 .black-scroll{
 	SCROLLBAR-FACE-COLOR:darken(@main-color,30%); 
 	SCROLLBAR-SHADOW-COLOR: darken(@main-color,20%); 
@@ -744,7 +771,20 @@ input[type="file"]::-webkit-file-upload-button{cursor:pointer;}
 	SCROLLBAR-3DLIGHT-COLOR: #DDF8FF; 
 	SCROLLBAR-DARKSHADOW-COLOR: #92C0D1; 
 	SCROLLBAR-TRACK-COLOR:darken(@main-color,46%); 
-	SCROLLBAR-ARROW-COLOR: darken(@main-color,30%);
+	SCROLLBAR-ARROW-COLOR: darken(@main-color,30%);::-webkit-scrollbar {
+		width: 7px;
+	}::-webkit-scrollbar-thumb {
+		background-color: darken(desaturate(@main-color,60%),30%);
+		background-clip: padding-box;
+		min-height: 28px;
+		padding: 100px 0;
+		box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1);
+		border-radius: 10px;
+	}::-webkit-scrollbar-track {
+		-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+		-webkit-border-radius: 10px;
+		border-radius: 10px;
+	}
 }
 /* 
 	name:浅色滚动条
@@ -752,22 +792,6 @@ input[type="file"]::-webkit-file-upload-button{cursor:pointer;}
 	note:仅支持谷歌
 	author:wumj
 */
-.ligth-scroll::-webkit-scrollbar {
-	width: 7px;
-}
-.ligth-scroll::-webkit-scrollbar-thumb {
-	background-color:lighten(saturate(@main-color, -50%),10%);
-	background-clip: padding-box;
-	min-height: 28px;
-	padding: 100px 0;
-	box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1);
-	border-radius: 10px;
-}
-.ligth-scroll::-webkit-scrollbar-track {
-	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
-	-webkit-border-radius: 10px;
-	border-radius: 10px;
-}
 .ligth-scroll{
 	// 拖拽条颜色
 	SCROLLBAR-FACE-COLOR:lighten(saturate(@main-color, -50%),34%);
@@ -776,7 +800,20 @@ input[type="file"]::-webkit-file-upload-button{cursor:pointer;}
 	// 上下箭头颜色
 	SCROLLBAR-ARROW-COLOR: lighten(saturate(@main-color, -50%),40%);
 	// 拖拽条描边颜色
-	scrollbar-shadow-color:lighten(saturate(@main-color, -50%),22%);
+	scrollbar-shadow-color:lighten(saturate(@main-color, -50%),22%);::-webkit-scrollbar {
+		width: 7px;
+	}::-webkit-scrollbar-thumb {
+		background-color:lighten(saturate(@main-color, -50%),10%);
+		background-clip: padding-box;
+		min-height: 28px;
+		padding: 100px 0;
+		box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1);
+		border-radius: 10px;
+	}::-webkit-scrollbar-track {
+		-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+		-webkit-border-radius: 10px;
+		border-radius: 10px;
+	}
 }
 /* 
 	name:上下三角形图标
@@ -1065,6 +1102,7 @@ input[type="file"]::-webkit-file-upload-button{cursor:pointer;}
 	border-radius: @radius-size;
 	color:@font-base-color;	
 	z-index: 2;
+	line-height: normal;
 	.pop-shadow;
 }
 .hover-tips .triangle{

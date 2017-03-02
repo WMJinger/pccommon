@@ -29,6 +29,22 @@
      <span style="display:inline-block;width: 20%;height: 120px;"><img class="responsive-img" src="images/2.jpg"/></span>
      <span style="display:inline-block;width: 100px;height: 120px;"><img class="responsive-img" src="images/1.jpg"/></span>
 </div>
+<h2>放大图片</h2>
+<div class="section">
+	<div class="zoompic-wrap" id="zoomInPic">
+		<div class="small-pic">
+			<div class="target"></div>
+			<img class="responsive-img" src="images/1.jpg">
+		</div>
+		<div class="big-pic">
+			<img src="images/1.jpg"/>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	// 放大图片
+    zoomInPic($('#zoomInPic'));
+</script>
 <h2>九宫格图片 4:3比例</h2>
 <div class="section">
 	<div class="sudoku-wrap" id="sudoku2" style="width: 600px;">

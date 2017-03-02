@@ -65,6 +65,26 @@ body {
   padding: 0;
   color: #333333;
   background-color: #ffffff;
+  SCROLLBAR-FACE-COLOR: #ffffff;
+  SCROLLBAR-TRACK-COLOR: #e1ecf3;
+  SCROLLBAR-ARROW-COLOR: #ffffff;
+  scrollbar-shadow-color: #dae7f0;
+}
+body ::-webkit-scrollbar {
+  width: 7px;
+}
+body ::-webkit-scrollbar-thumb {
+  background-color: #aecbdf;
+  background-clip: padding-box;
+  min-height: 28px;
+  padding: 100px 0;
+  box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+body ::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
 }
 .frame-shadow {
   box-shadow: 1px 3px 11px rgba(0, 0, 0, 0.2);
@@ -399,6 +419,45 @@ input[type="file"]::-webkit-file-upload-button {
   overflow: hidden;
   text-align: center;
   background-color: #e4e4e4;
+}
+/* 
+	name:放大图片样式
+	date:2016-03-02
+	author:wumj
+*/
+.zoompic-wrap {
+  position: relative;
+}
+.zoompic-wrap .small-pic {
+  width: 300px;
+  height: 200px;
+  border: 1px solid #e4e4e4;
+  overflow: hidden;
+}
+.zoompic-wrap .big-pic {
+  display: none;
+  border: 1px solid #e4e4e4;
+  overflow: hidden;
+  width: 300px;
+  height: 200px;
+  position: absolute;
+  left: 314px;
+  top: 0px;
+}
+.zoompic-wrap .big-pic img {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.zoompic-wrap .target {
+  width: 50px;
+  height: 50px;
+  background: #000;
+  opacity: 0.4;
+  filter: alpha(opacity=40);
+  position: absolute;
+  display: none;
+  /*默认隐藏*/
 }
 /* 
 	name:图标样式
@@ -737,22 +796,6 @@ input[type="file"]::-webkit-file-upload-button {
 	note:仅支持谷歌
 	author:wumj
 */
-.black-scroll::-webkit-scrollbar {
-  width: 7px;
-}
-.black-scroll::-webkit-scrollbar-thumb {
-  background-color: #022944;
-  background-clip: padding-box;
-  min-height: 28px;
-  padding: 100px 0;
-  box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-}
-.black-scroll::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-}
 .black-scroll {
   SCROLLBAR-FACE-COLOR: #0670bb;
   SCROLLBAR-SHADOW-COLOR: #078ded;
@@ -762,16 +805,38 @@ input[type="file"]::-webkit-file-upload-button {
   SCROLLBAR-TRACK-COLOR: #03416c;
   SCROLLBAR-ARROW-COLOR: #0670bb;
 }
+.black-scroll ::-webkit-scrollbar {
+  width: 7px;
+}
+.black-scroll ::-webkit-scrollbar-thumb {
+  background-color: #406681;
+  background-clip: padding-box;
+  min-height: 28px;
+  padding: 100px 0;
+  box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+.black-scroll ::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
 /* 
 	name:浅色滚动条
 	date:2017-01-16
 	note:仅支持谷歌
 	author:wumj
 */
-.ligth-scroll::-webkit-scrollbar {
+.ligth-scroll {
+  SCROLLBAR-FACE-COLOR: #ffffff;
+  SCROLLBAR-TRACK-COLOR: #e1ecf3;
+  SCROLLBAR-ARROW-COLOR: #ffffff;
+  scrollbar-shadow-color: #dae7f0;
+}
+.ligth-scroll ::-webkit-scrollbar {
   width: 7px;
 }
-.ligth-scroll::-webkit-scrollbar-thumb {
+.ligth-scroll ::-webkit-scrollbar-thumb {
   background-color: #aecbdf;
   background-clip: padding-box;
   min-height: 28px;
@@ -779,16 +844,10 @@ input[type="file"]::-webkit-file-upload-button {
   box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 }
-.ligth-scroll::-webkit-scrollbar-track {
+.ligth-scroll ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   -webkit-border-radius: 10px;
   border-radius: 10px;
-}
-.ligth-scroll {
-  SCROLLBAR-FACE-COLOR: #ffffff;
-  SCROLLBAR-TRACK-COLOR: #e1ecf3;
-  SCROLLBAR-ARROW-COLOR: #ffffff;
-  scrollbar-shadow-color: #dae7f0;
 }
 /* 
 	name:上下三角形图标
@@ -1080,6 +1139,7 @@ input[type="file"]::-webkit-file-upload-button {
   border-radius: 2px;
   color: #333333;
   z-index: 2;
+  line-height: normal;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
   -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 }
